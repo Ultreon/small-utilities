@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "# #"
+  ],
+  "key": {
+    "#": [
+      {
+        "item": "minecraft:stripped_jungle_log"
+      },
+      {
+        "item": "minecraft:stripped_jungle_wood"
+      }
+    ]
+  },
+  "result": {
+    "item": "smallutils:jungle_coffee_table"
+  }
+}

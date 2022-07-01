@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "smallutils:block/jungle_table"
+    }
+  }
+}

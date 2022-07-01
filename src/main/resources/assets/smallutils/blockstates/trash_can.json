@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "smallutils:block/trash_can",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "smallutils:block/trash_can"
+    },
+    "facing=south": {
+      "model": "smallutils:block/trash_can",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "smallutils:block/trash_can",
+      "y": 270
+    }
+  }
+}

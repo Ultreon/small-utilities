@@ -1,0 +1,7 @@
+{
+  "death.attack.smallutils.sliced_by_stone_cutter": "%1$s was sliced by a stone cutter",
+  "death.attack.smallutils.sliced_by_stone_cutter.player": "%1$s was sliced by a stone cutter whilst fighting %2$s",
+  "block.smallutils.iron_grid_plate": "Iron Grid Plate",
+  "block.smallutils.laptop": "Laptop",
+  "block.smallutils.trash_can": "Trash Can"
+}

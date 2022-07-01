@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,closed=false": {
+      "model": "smallutils:block/laptop_closed",
+      "y": 90
+    },
+    "facing=east,closed=true": {
+      "model": "smallutils:block/laptop",
+      "y": 90
+    },
+    "facing=north,closed=false": {
+      "model": "smallutils:block/laptop_closed"
+    },
+    "facing=north,closed=true": {
+      "model": "smallutils:block/laptop"
+    },
+    "facing=south,closed=false": {
+      "model": "smallutils:block/laptop_closed",
+      "y": 180
+    },
+    "facing=south,closed=true": {
+      "model": "smallutils:block/laptop",
+      "y": 180
+    },
+    "facing=west,closed=false": {
+      "model": "smallutils:block/laptop_closed",
+      "y": 270
+    },
+    "facing=west,closed=true": {
+      "model": "smallutils:block/laptop",
+      "y": 270
+    }
+  }
+}

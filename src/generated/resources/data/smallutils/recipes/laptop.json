@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#O#",
+    "///"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:nuggets/iron"
+    },
+    "/": {
+      "tag": "forge:ingots/iron"
+    },
+    "O": {
+      "tag": "forge:glass_panes"
+    }
+  },
+  "result": {
+    "item": "smallutils:laptop"
+  }
+}
