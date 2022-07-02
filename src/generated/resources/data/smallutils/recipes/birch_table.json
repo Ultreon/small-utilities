@@ -2,6 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "###",
+    "# #",
     "# #"
   ],
   "key": {
@@ -15,7 +16,7 @@
     ]
   },
   "result": {
-    "item": "smallutils:birch_coffee_table",
-    "count": 6
+    "item": "smallutils:birch_table",
+    "count": 4
   }
 }

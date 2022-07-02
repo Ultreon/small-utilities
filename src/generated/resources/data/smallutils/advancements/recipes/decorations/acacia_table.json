@@ -1,0 +1,47 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "smallutils:acacia_table"
+    ]
+  },
+  "criteria": {
+    "has_stripped_log": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:stripped_acacia_log"
+            ]
+          }
+        ]
+      }
+    },
+    "has_stripped_wood": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:stripped_acacia_wood"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "smallutils:acacia_table"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_stripped_log",
+      "has_stripped_wood",
+      "has_the_recipe"
+    ]
+  ]
+}
