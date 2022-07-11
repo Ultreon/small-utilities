@@ -68,6 +68,8 @@ public class SmallUtilities {
         ModBlocks.register(modEvents);
         ModItems.register(modEvents);
         ModTags.init();
+
+        Config.init();
     }
 
     /**

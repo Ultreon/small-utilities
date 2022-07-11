@@ -1,0 +1,10 @@
+*.toml text=auto eof=lf
+*.json text=auto eof=lf
+*.java text=auto eof=lf
+*.mcmeta text=auto eof=lf
+*.kt text=auto eof=lf
+*.kts text=auto eof=lf
+*.gradle text=auto eof=lf
+*.txt text=auto eof=lf
+*.md text=auto eof=lf
+*.properties text=auto eof=lf

@@ -1,5 +1,6 @@
 package com.ultreon.mods.smallutilities.block;
 
+import com.ultreon.mods.smallutilities.Config;
 import com.ultreon.mods.smallutilities.init.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -61,18 +62,22 @@ public class TrashCanBlock extends Block {
     @NotNull
     @Override
     public InteractionResult use(@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull Player pPlayer, @NotNull InteractionHand pHand, @NotNull BlockHitResult pHit) {
-        ItemStack itemInHand = pPlayer.getItemInHand(pHand);
-        if (itemInHand.isEmpty()) return InteractionResult.PASS;
-        if (itemInHand.is(ModTags.Items.TRASH_BLACKLIST)) return InteractionResult.FAIL;
+        if (Config.ENABLE_TRASH_CAN.get()) {
+            ItemStack itemInHand = pPlayer.getItemInHand(pHand);
+            if (itemInHand.isEmpty()) return InteractionResult.PASS;
+            if (itemInHand.is(ModTags.Items.TRASH_BLACKLIST)) return InteractionResult.FAIL;
 
-        if (pPlayer.isCrouching()) itemInHand.setCount(0);
-        else itemInHand.shrink(1);
+            if (pPlayer.isCrouching()) itemInHand.setCount(0);
+            else itemInHand.shrink(1);
 
-        if (pPlayer.getRandom().nextInt(30) == 0)
-            pLevel.addFreshEntity(new ExperienceOrb(pLevel, pPos.getX() + 0.5, pPos.getY() + 1.5, pPos.getZ() + 0.5, 1));
+            if (pPlayer.getRandom().nextInt(30) == 0)
+                pLevel.addFreshEntity(new ExperienceOrb(pLevel, pPos.getX() + 0.5, pPos.getY() + 1.5, pPos.getZ() + 0.5, 1));
 
-        pLevel.playSound(pPlayer, pPos, SoundEvents.COMPOSTER_FILL_SUCCESS, SoundSource.BLOCKS, 1.0F, 1.0F);
-        return InteractionResult.CONSUME;
+            pLevel.playSound(pPlayer, pPos, SoundEvents.COMPOSTER_FILL_SUCCESS, SoundSource.BLOCKS, 1.0F, 1.0F);
+            return InteractionResult.CONSUME;
+        } else {
+            return InteractionResult.PASS;
+        }
     }
 
     /**
