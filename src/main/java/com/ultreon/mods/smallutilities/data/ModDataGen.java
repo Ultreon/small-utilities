@@ -7,6 +7,7 @@ import com.ultreon.mods.smallutilities.data.lang.ModDutchLanguage;
 import com.ultreon.mods.smallutilities.data.lang.ModEnglishLanguage;
 import com.ultreon.mods.smallutilities.data.loot.ModLoot;
 import com.ultreon.mods.smallutilities.data.recipes.ModRecipes;
+import com.ultreon.mods.smallutilities.data.tags.ModBlockTags;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -24,6 +25,7 @@ public class ModDataGen {
         generator.addProvider(new ModItemModels(generator, exFileHelper));
         generator.addProvider(new ModRecipes(generator));
         generator.addProvider(new ModLoot(generator));
+        generator.addProvider(new ModBlockTags(generator, exFileHelper));
         generator.addProvider(ModEnglishLanguage.ofCountry(generator, exFileHelper, "us"));
         generator.addProvider(ModEnglishLanguage.ofCountry(generator, exFileHelper, "gb"));
         generator.addProvider(ModEnglishLanguage.ofCountry(generator, exFileHelper, "au"));
