@@ -1,7 +1,9 @@
 package com.ultreon.mods.smallutilities.data.client;
 
 import com.ultreon.mods.smallutilities.SmallUtilities;
+import com.ultreon.mods.smallutilities.block.FutureDashboardBlock;
 import com.ultreon.mods.smallutilities.init.ModBlocks;
+import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
@@ -38,6 +40,10 @@ public class ModBlockStates extends BlockStateProvider {
         table(ModBlocks.JUNGLE_TABLE.get(), "jungle");
         table(ModBlocks.ACACIA_TABLE.get(), "acacia");
         table(ModBlocks.DARK_OAK_TABLE.get(), "dark_oak");
+
+        for (char c = 'a'; c <= 'z'; c++) {
+            futureDashboard(ModBlocks.getFutureDashboard(c), Character.toString(c));
+        }
     }
 
     private void coffeeTable(Block block, String type) {
@@ -62,6 +68,21 @@ public class ModBlockStates extends BlockStateProvider {
                             .texture("0", "minecraft:block/stripped_" + type + "_log")
                             .texture("particle", "minecraft:block/stripped_" + type + "_log")
                     )
+                    .build();
+        });
+    }
+
+    private void futureDashboard(Block block, String type) {
+        getVariantBuilder(block).forAllStates(state -> {
+            String name = Objects.requireNonNull(block.getRegistryName()).getPath();
+            Direction direction = state.getValue(FutureDashboardBlock.FACING);
+            return ConfiguredModel.builder()
+                    .modelFile(models()
+                            .withExistingParent(name, modLoc("block/future_dashboard"))
+                            .texture("0", modLoc("block/future_dashboard_" + type))
+                            .texture("particle", modLoc("block/future_dashboard_" + type))
+                    )
+                    .rotationY((int) direction.toYRot())
                     .build();
         });
     }

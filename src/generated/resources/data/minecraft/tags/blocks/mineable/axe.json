@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+      "smallutils:oak_coffee_table",
+      "smallutils:birch_coffee_table",
+      "smallutils:spruce_coffee_table",
+      "smallutils:jungle_coffee_table",
+      "smallutils:acacia_coffee_table",
+      "smallutils:dark_oak_coffee_table",
+      "smallutils:oak_table",
+      "smallutils:birch_table",
+      "smallutils:spruce_table",
+      "smallutils:jungle_table",
+      "smallutils:acacia_table",
+      "smallutils:dark_oak_table"
+  ]
+}

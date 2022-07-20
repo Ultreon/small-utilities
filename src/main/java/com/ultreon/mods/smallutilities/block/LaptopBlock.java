@@ -38,7 +38,7 @@ public class LaptopBlock extends Block {
     private static final VoxelShape SHAPE_WEST = Block.box(1, 0, 1, 11, 2, 15);
 
     public LaptopBlock(Properties properties) {
-        super(properties.instabreak());
+        super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(CLOSED, true));
     }
 

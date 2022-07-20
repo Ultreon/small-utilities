@@ -35,7 +35,7 @@ public class TrashCanBlock extends Block {
     private static final VoxelShape SHAPE = Block.box(1, 0, 1, 15, 16, 15);
 
     public TrashCanBlock(Properties properties) {
-        super(properties.instabreak());
+        super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH)/*.setValue(CLOSED, true)*/);
     }
 

@@ -4,8 +4,6 @@ import com.mojang.logging.LogUtils;
 import com.ultreon.mods.smallutilities.init.ModBlocks;
 import com.ultreon.mods.smallutilities.init.ModItems;
 import com.ultreon.mods.smallutilities.init.ModTags;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.MinecraftForge;
@@ -14,7 +12,6 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
@@ -38,7 +35,6 @@ import java.util.Locale;
  */
 @Mod(SmallUtilities.MOD_ID)
 public class SmallUtilities {
-
     public static final String MOD_ID = "smallutils";
     private static final Logger LOGGER = LogUtils.getLogger();
 
@@ -56,7 +52,6 @@ public class SmallUtilities {
 
         // Register the setup method for modloading
         modEvents.addListener(this::commonSetup);
-        modEvents.addListener(this::clientSetup);
         // Register the enqueueIMC method for modloading
         modEvents.addListener(this::enqueueIMC);
         // Register the processIMC method for modloading
@@ -94,19 +89,6 @@ public class SmallUtilities {
      */
     private void commonSetup(final FMLCommonSetupEvent event) {
         // Do some common setup things
-    }
-
-    /**
-     * Client side setup handling.
-     * Handles only things from the client side.
-     *
-     * @param event the fml client setup event.
-     * @author Qboi123
-     * @since 1.0.0
-     */
-    private void clientSetup(final FMLClientSetupEvent event) {
-        // Do some client setup things
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.IRON_GRID_PLATE.get(), RenderType.cutout());
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event) {

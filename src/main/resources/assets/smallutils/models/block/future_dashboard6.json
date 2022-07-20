@@ -1,0 +1,7 @@
+{
+    "parent": "smallutils:block/future_dashboard",
+    "textures": {
+        "0": "smallutils:block/future_dashboard6",
+        "particle": "smallutils:block/future_dashboard6"
+    }
+}

@@ -18,7 +18,7 @@ apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'maven-publish'
 
 group = 'com.ultreon.mods'
-version = '1.0.0-dev7'
+version = '1.0.0-beta1'
 
 java {
     archivesBaseName = 'small-utilities'
