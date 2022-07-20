@@ -1,6 +1,7 @@
 package com.ultreon.mods.smallutilities.data.lang;
 
 import com.ultreon.mods.smallutilities.SmallUtilities;
+import com.ultreon.mods.smallutilities.block.FutureDashboardBlock;
 import com.ultreon.mods.smallutilities.init.ModBlocks;
 import com.ultreon.mods.smallutilities.init.ModDamageSources;
 import net.minecraft.data.DataGenerator;
@@ -46,6 +47,12 @@ public class ModDutchLanguage extends LanguageProvider {
         addBlock(ModBlocks.JUNGLE_TABLE, "Oerwoudhouten tafel");
         addBlock(ModBlocks.ACACIA_TABLE, "Acacia tafel");
         addBlock(ModBlocks.DARK_OAK_TABLE, "Donkere eiken tafel");
+
+        for (FutureDashboardBlock block : ModBlocks.getAllFutureDashboards().toList()) {
+            addBlock(() -> block, "Future Dashboard");
+        }
+
+        addBlock(ModBlocks.FUTURE_DASHBOARD, "Future Dashboard");
     }
 
     private void addDamageSource(DamageSource key, String name) {
