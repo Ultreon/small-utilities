@@ -1,6 +1,7 @@
 package com.ultreon.mods.smallutilities.data.lang;
 
 import com.ultreon.mods.smallutilities.SmallUtilities;
+import com.ultreon.mods.smallutilities.block.FutureDashboardBlock;
 import com.ultreon.mods.smallutilities.init.ModBlocks;
 import com.ultreon.mods.smallutilities.init.ModDamageSources;
 import net.minecraft.data.DataGenerator;
@@ -13,8 +14,8 @@ public class ModEnglishLanguage extends LanguageProvider {
         super(generator, SmallUtilities.MOD_ID, "en_" + country);
     }
 
-    public static ModDutchLanguage ofCountry(DataGenerator generator, ExistingFileHelper exFileHelper, String country) {
-        return new ModDutchLanguage(generator, exFileHelper, country);
+    public static ModEnglishLanguage ofCountry(DataGenerator generator, ExistingFileHelper exFileHelper, String country) {
+        return new ModEnglishLanguage(generator, exFileHelper, country);
     }
 
     @Override
@@ -46,6 +47,12 @@ public class ModEnglishLanguage extends LanguageProvider {
         addBlock(ModBlocks.JUNGLE_TABLE, "Jungle Table");
         addBlock(ModBlocks.ACACIA_TABLE, "Acacia Table");
         addBlock(ModBlocks.DARK_OAK_TABLE, "Dark Oak Table");
+
+        for (FutureDashboardBlock block : ModBlocks.getAllFutureDashboards().toList()) {
+            addBlock(() -> block, "Future Dashboard");
+        }
+
+        addBlock(ModBlocks.FUTURE_DASHBOARD, "Future Dashboard");
     }
 
     private void addDamageSource(DamageSource key, String name) {
