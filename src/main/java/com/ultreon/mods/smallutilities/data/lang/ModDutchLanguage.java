@@ -49,10 +49,10 @@ public class ModDutchLanguage extends LanguageProvider {
         addBlock(ModBlocks.DARK_OAK_TABLE, "Donkere eiken tafel");
 
         for (FutureDashboardBlock block : ModBlocks.getAllFutureDashboards().toList()) {
-            addBlock(() -> block, "Future dashboard");
+            addBlock(() -> block, "Futuristische dashboard");
         }
 
-        addBlock(ModBlocks.FUTURE_DASHBOARD, "Future dashboard");
+        addBlock(ModBlocks.FUTURE_DASHBOARD, "Futuristische dashboard");
     }
 
     private void addDamageSource(DamageSource key, String name) {
