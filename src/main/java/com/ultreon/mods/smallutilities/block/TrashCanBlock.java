@@ -44,7 +44,7 @@ public class TrashCanBlock extends Block implements EntityBlock {
 
     public TrashCanBlock(final Properties properties) {
         super(properties);
-        registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(POWERED, false));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(POWERED, false));
     }
 
     public boolean canSurvive(@NotNull final BlockState state, @NotNull final LevelReader level, final BlockPos pos) {
@@ -57,10 +57,10 @@ public class TrashCanBlock extends Block implements EntityBlock {
         if (level.isClientSide) {
             return InteractionResult.SUCCESS;
         } else {
-            final MenuProvider menuprovider = getMenuProvider(state, level, pos);
+            final MenuProvider menuprovider = this.getMenuProvider(state, level, pos);
             if (null != menuprovider) {
                 player.openMenu(menuprovider);
-                player.awardStat(getOpenTrashCanStat());
+                player.awardStat(this.getOpenTrashCanStat());
                 PiglinAi.angerNearbyPiglins(player, true);
             }
 
@@ -70,7 +70,7 @@ public class TrashCanBlock extends Block implements EntityBlock {
 
     public void neighborChanged(@NotNull final BlockState state, final Level level, @NotNull final BlockPos pos, @NotNull final Block block, @NotNull final BlockPos fromPos, final boolean isMoving) {
         final boolean flag = level.hasNeighborSignal(pos);
-        if (!defaultBlockState().is(block) && flag != state.getValue(POWERED)) {
+        if (!this.defaultBlockState().is(block) && flag != state.getValue(POWERED)) {
             if (flag && !state.getValue(POWERED)) {
                 level.getBlockEntity(pos, ModBlockEntities.TRASH_CAN.get()).ifPresent(TrashCanBlockEntity::trash);
             }
@@ -92,7 +92,7 @@ public class TrashCanBlock extends Block implements EntityBlock {
 
     @NotNull
     public BlockEntityType<TrashCanBlockEntity> blockEntityType() {
-        return blockEntityType.get();
+        return this.blockEntityType.get();
     }
 
     private ResourceLocation getOpenTrashCanStat() {
@@ -112,7 +112,7 @@ public class TrashCanBlock extends Block implements EntityBlock {
 
     public BlockState getStateForPlacement(final BlockPlaceContext context) {
         final boolean flag = context.getLevel().hasNeighborSignal(context.getClickedPos());
-        return defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite()).setValue(POWERED, flag);
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite()).setValue(POWERED, flag);
     }
 
     /**

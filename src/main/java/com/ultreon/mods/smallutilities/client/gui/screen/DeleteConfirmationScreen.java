@@ -1,6 +1,7 @@
 package com.ultreon.mods.smallutilities.client.gui.screen;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.*;
@@ -35,28 +36,28 @@ public class DeleteConfirmationScreen extends Screen {
     protected void init() {
         super.init();
 
-        final int midX = width / 2;
+        final int midX = this.width / 2;
 
-        buttonCooldown = 60;
+        this.buttonCooldown = 60;
 
-        yesButton = addRenderableWidget(new Button(midX - 105, 0, 100, 20, CommonComponents.GUI_YES, (button) -> {
+        this.yesButton = this.addRenderableWidget(new Button(midX - 105, 0, 100, 20, CommonComponents.GUI_YES, (button) -> {
             assert null != this.minecraft;
             assert null != this.minecraft.player;
-            if (parent.getMenu().clickMenuButton(minecraft.player, 0)) {
+            if (this.parent.getMenu().clickMenuButton(this.minecraft.player, 0)) {
                 assert null != this.minecraft.gameMode;
-                minecraft.gameMode.handleInventoryButtonClick(parent.getMenu().containerId, 0);
+                this.minecraft.gameMode.handleInventoryButtonClick(this.parent.getMenu().containerId, 0);
             }
-            minecraft.popGuiLayer();
+            this.minecraft.popGuiLayer();
         }));
 
-        noButton = addRenderableWidget(new Button(midX + 5, 0, 100, 20, CommonComponents.GUI_NO, (button) -> {
+        this.noButton = this.addRenderableWidget(new Button(midX + 5, 0, 100, 20, CommonComponents.GUI_NO, (button) -> {
             if (null != this.minecraft) {
-                minecraft.popGuiLayer();
+                this.minecraft.popGuiLayer();
             }
         }));
 
-        yesButton.active = false;
-        noButton.active = false;
+        this.yesButton.active = false;
+        this.noButton.active = false;
     }
 
     @Override
@@ -64,21 +65,21 @@ public class DeleteConfirmationScreen extends Screen {
         super.tick();
 
         if (0 < this.buttonCooldown) {
-            buttonCooldown--;
+            this.buttonCooldown--;
         } else {
-            yesButton.active = true;
-            noButton.active = true;
+            this.yesButton.active = true;
+            this.noButton.active = true;
         }
     }
 
     @Override
     public void render(@NotNull final PoseStack pose, final int mouseX, final int mouseY, final float partialTick) {
-        renderBackground(pose, 0);
+        this.renderBackground(pose, 0);
 
         super.render(pose, mouseX, mouseY, partialTick);
 
-        final int midX = width / 2;
-        final int midY = height / 2 - 60;
+        final int midX = this.width / 2;
+        final int midY = this.height / 2 - 60;
 
         final int titleY = midY - 40;
         final int textY = midY + 20;
@@ -88,14 +89,14 @@ public class DeleteConfirmationScreen extends Screen {
         {
             pose.scale(2f, 2f, 1f);
 
-            GuiComponent.drawCenteredString(pose, font, title, midX / 2, titleY, 0xFFFFFF);
+            GuiComponent.drawCenteredString(pose, this.font, this.title, midX / 2, titleY, 0xFFFFFF);
         }
         pose.popPose();
 
-        GuiComponent.drawCenteredString(pose, font, line1, midX, textY, 0xFFFFFF);
-        GuiComponent.drawCenteredString(pose, font, line2, midX, textY1, 0xFFFFFF);
+        GuiComponent.drawCenteredString(pose, this.font, this.line1, midX, textY, 0xFFFFFF);
+        GuiComponent.drawCenteredString(pose, this.font, this.line2, midX, textY1, 0xFFFFFF);
 
-        final Container container = parent.getMenu().getContainer();
+        final Container container = this.parent.getMenu().getContainer();
         int y = midY + 50;
         for (int i = 0; i < container.getContainerSize(); i++) {
             final ItemStack item = container.getItem(i);
@@ -112,23 +113,23 @@ public class DeleteConfirmationScreen extends Screen {
                             .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_ITEM, new HoverEvent.ItemStackInfo(item))));
             textComponent.append(new TextComponent("").append(name));
 
-            GuiComponent.drawCenteredString(pose, font, textComponent, midX, y, 0xFFFFFF);
+            GuiComponent.drawCenteredString(pose, this.font, textComponent, midX, y, 0xFFFFFF);
 
-            y += font.lineHeight;
+            y += this.font.lineHeight;
         }
 
-        y += font.lineHeight * 2;
+        y += this.font.lineHeight * 2;
 
-        yesButton.y = y;
-        noButton.y = y;
+        this.yesButton.y = y;
+        this.noButton.y = y;
     }
 
     public Component getLine1() {
-        return line1;
+        return this.line1;
     }
 
     public Component getLine2() {
-        return line2;
+        return this.line2;
     }
 
     @Override

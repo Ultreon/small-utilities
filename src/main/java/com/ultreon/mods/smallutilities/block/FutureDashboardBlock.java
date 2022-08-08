@@ -13,6 +13,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
+@SuppressWarnings("deprecation")
 public class FutureDashboardBlock extends HorizontalDirectionalBlock {
     private static final VoxelShape SHAPE_NORTH = Shapes.or(
             Block.box(0, 0, 11, 16, 10.1, 16),
@@ -38,7 +39,7 @@ public class FutureDashboardBlock extends HorizontalDirectionalBlock {
     public FutureDashboardBlock(final Properties properties) {
         super(properties);
 
-        registerDefaultState(getStateDefinition().any().setValue(HorizontalDirectionalBlock.FACING, Direction.NORTH));
+        this.registerDefaultState(this.getStateDefinition().any().setValue(HorizontalDirectionalBlock.FACING, Direction.NORTH));
     }
 
     @NotNull
@@ -49,8 +50,7 @@ public class FutureDashboardBlock extends HorizontalDirectionalBlock {
             case EAST -> SHAPE_EAST;
             case SOUTH -> SHAPE_SOUTH;
             case WEST -> SHAPE_WEST;
-            default ->
-                    throw new IllegalStateException("Unexpected value: " + pState.getValue(HorizontalDirectionalBlock.FACING));
+            default -> throw new IllegalStateException("Unexpected value: " + pState.getValue(HorizontalDirectionalBlock.FACING));
         };
     }
 
@@ -60,7 +60,7 @@ public class FutureDashboardBlock extends HorizontalDirectionalBlock {
     }
 
     public BlockState getStateForPlacement(final BlockPlaceContext pContext) {
-        return defaultBlockState().setValue(HorizontalDirectionalBlock.FACING, pContext.getHorizontalDirection());
+        return this.defaultBlockState().setValue(HorizontalDirectionalBlock.FACING, pContext.getHorizontalDirection());
     }
 
     protected void createBlockStateDefinition(final StateDefinition.Builder<Block, BlockState> pBuilder) {

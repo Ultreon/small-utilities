@@ -35,7 +35,7 @@ public class IronGridPlateBlock extends Block implements SimpleWaterloggedBlock 
 
     public IronGridPlateBlock(final Properties properties) {
         super(properties);
-        registerDefaultState(stateDefinition.any().setValue(HALF, Half.BOTTOM).setValue(WATERLOGGED, Boolean.FALSE));
+        this.registerDefaultState(this.stateDefinition.any().setValue(HALF, Half.BOTTOM).setValue(WATERLOGGED, Boolean.FALSE));
     }
 
     @Override
@@ -64,7 +64,7 @@ public class IronGridPlateBlock extends Block implements SimpleWaterloggedBlock 
     }
 
     public BlockState getStateForPlacement(final BlockPlaceContext pContext) {
-        BlockState blockstate = defaultBlockState();
+        BlockState blockstate = this.defaultBlockState();
         final FluidState fluidstate = pContext.getLevel().getFluidState(pContext.getClickedPos());
         final Direction direction = pContext.getClickedFace();
         if (!pContext.replacingClickedOnBlock() && direction.getAxis().isHorizontal()) {

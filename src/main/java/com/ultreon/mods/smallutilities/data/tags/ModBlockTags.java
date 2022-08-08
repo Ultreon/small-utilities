@@ -26,12 +26,12 @@ public class ModBlockTags extends BlockTagsProvider {
 
     @Override
     protected void addTags() {
-        final TagAppender<Block> mineableWithPickaxe = tag(BlockTags.MINEABLE_WITH_PICKAXE)
+        final TagAppender<Block> mineableWithPickaxe = this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(ModBlocks.FUTURE_DASHBOARD.get())
                 .add(ModBlocks.LAPTOP.get())
                 .add(ModBlocks.IRON_GRID_PLATE.get())
                 .add(ModBlocks.TRASH_CAN.get());
-        final TagAppender<Block> needsStoneTool = tag(BlockTags.NEEDS_STONE_TOOL)
+        final TagAppender<Block> needsStoneTool = this.tag(BlockTags.NEEDS_STONE_TOOL)
                 .add(ModBlocks.FUTURE_DASHBOARD.get())
                 .add(ModBlocks.LAPTOP.get())
                 .add(ModBlocks.IRON_GRID_PLATE.get())
@@ -43,11 +43,11 @@ public class ModBlockTags extends BlockTagsProvider {
         }
 
         for (final CoffeeTableBlock block : ModBlocks.getAllCoffeeTables().toList()) {
-            tag(BlockTags.MINEABLE_WITH_AXE)
+            this.tag(BlockTags.MINEABLE_WITH_AXE)
                     .add(block);
         }
         for (final TableBlock block : ModBlocks.getAllTables().toList()) {
-            tag(BlockTags.MINEABLE_WITH_AXE)
+            this.tag(BlockTags.MINEABLE_WITH_AXE)
                     .add(block);
         }
     }

@@ -39,7 +39,7 @@ public class LaptopBlock extends Block {
 
     public LaptopBlock(final Properties properties) {
         super(properties);
-        registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(CLOSED, true));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(CLOSED, true));
     }
 
     public boolean canSurvive(@NotNull final BlockState pState, @NotNull final LevelReader pLevel, final BlockPos pPos) {
@@ -65,7 +65,7 @@ public class LaptopBlock extends Block {
     }
 
     public BlockState getStateForPlacement(final BlockPlaceContext pContext) {
-        return defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
+        return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
     }
 
     @NotNull
@@ -76,16 +76,16 @@ public class LaptopBlock extends Block {
         } else {
             pLevel.setBlock(pPos, pState.setValue(CLOSED, true), Block.UPDATE_NEIGHBORS | Block.UPDATE_CLIENTS);
         }
-        playSound(pPlayer, pLevel, pPos, !pState.getValue(CLOSED));
+        this.playSound(pPlayer, pLevel, pPos, !pState.getValue(CLOSED));
         return InteractionResult.SUCCESS;
     }
 
     protected void playSound(@Nullable final Player pPlayer, final Level pLevel, final BlockPos pPos, final boolean pIsOpened) {
         if (pIsOpened) {
-            final int i = material == Material.METAL ? 1037 : 1007;
+            final int i = this.material == Material.METAL ? 1037 : 1007;
             pLevel.levelEvent(pPlayer, i, pPos, 0);
         } else {
-            final int j = material == Material.METAL ? 1036 : 1013;
+            final int j = this.material == Material.METAL ? 1036 : 1013;
             pLevel.levelEvent(pPlayer, j, pPos, 0);
         }
 

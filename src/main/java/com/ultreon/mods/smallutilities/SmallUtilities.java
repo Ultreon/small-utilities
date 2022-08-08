@@ -107,8 +107,8 @@ public class SmallUtilities {
 
     private void imcMessageHandle(final InterModComms.IMCMessage action) {
         switch (action.method().toLowerCase(Locale.ROOT)) {
-            case "hello_world" -> imcHelloWorld(action);
-            case "register:cutter_block" -> imcRegisterCutterBlock(action);
+            case "hello_world" -> this.imcHelloWorld(action);
+            case "register:cutter_block" -> this.imcRegisterCutterBlock(action);
         }
     }
 

@@ -21,15 +21,15 @@ public class ModItemModels extends ItemModelProvider {
         ModBlocks.getAllBlocks().forEachOrdered(block -> {
             if (block.asItem() != Items.AIR) {
                 if (block instanceof IronGridPlateBlock) {
-                    withExistingParent(Objects.requireNonNull(block.getRegistryName()).toString(), modLoc("block/iron_grid_plate_bottom"));
+                    this.withExistingParent(Objects.requireNonNull(block.getRegistryName()).toString(), this.modLoc("block/iron_grid_plate_bottom"));
                 } else {
-                    blockItem(block);
+                    this.blockItem(block);
                 }
             }
         });
     }
 
     private void blockItem(final Block block) {
-        withExistingParent(Objects.requireNonNull(block.asItem().getRegistryName()).getPath(), modLoc("block/" + Objects.requireNonNull(block.getRegistryName()).getPath()));
+        this.withExistingParent(Objects.requireNonNull(block.asItem().getRegistryName()).getPath(), this.modLoc("block/" + Objects.requireNonNull(block.getRegistryName()).getPath()));
     }
 }

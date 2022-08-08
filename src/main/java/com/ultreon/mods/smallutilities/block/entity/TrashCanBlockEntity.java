@@ -47,19 +47,19 @@ public class TrashCanBlockEntity extends BaseContainerBlockEntity implements Tic
 
     public void load(@NotNull final CompoundTag tag) {
         super.load(tag);
-        ContainerHelper.loadAllItems(tag, items);
+        ContainerHelper.loadAllItems(tag, this.items);
 
     }
 
     protected void saveAdditional(@NotNull final CompoundTag tag) {
         super.saveAdditional(tag);
-        ContainerHelper.saveAllItems(tag, items);
+        ContainerHelper.saveAllItems(tag, this.items);
     }
 
     @NotNull
     @Override
     protected AbstractContainerMenu createMenu(final int id, @NotNull final Inventory player) {
-        return new TrashCanMenu(id, player, this, ContainerLevelAccess.create(Objects.requireNonNull(level), worldPosition));
+        return new TrashCanMenu(id, player, this, ContainerLevelAccess.create(Objects.requireNonNull(this.level), this.worldPosition));
     }
 
     @Override
@@ -69,26 +69,26 @@ public class TrashCanBlockEntity extends BaseContainerBlockEntity implements Tic
 
     @Override
     public boolean isEmpty() {
-        return getItems().stream().allMatch(ItemStack::isEmpty);
+        return this.getItems().stream().allMatch(ItemStack::isEmpty);
     }
 
     @NotNull
     @Override
     public ItemStack getItem(final int slot) {
-        return getItems().get(slot);
+        return this.getItems().get(slot);
     }
 
     @Override
     public void setItem(final int slot, @NotNull final ItemStack stack) {
-        getItems().set(slot, stack);
+        this.getItems().set(slot, stack);
     }
 
     @NotNull
     @Override
     public ItemStack removeItem(final int slot, final int amount) {
-        final ItemStack itemstack = ContainerHelper.removeItem(getItems(), slot, amount);
+        final ItemStack itemstack = ContainerHelper.removeItem(this.getItems(), slot, amount);
         if (!itemstack.isEmpty()) {
-            setChanged();
+            this.setChanged();
         }
 
         return itemstack;
@@ -97,16 +97,16 @@ public class TrashCanBlockEntity extends BaseContainerBlockEntity implements Tic
     @NotNull
     @Override
     public ItemStack removeItemNoUpdate(final int slot) {
-        return ContainerHelper.takeItem(getItems(), slot);
+        return ContainerHelper.takeItem(this.getItems(), slot);
     }
 
     @Override
     public boolean stillValid(@NotNull final Player pPlayer) {
-        assert null != level;
-        if (level.getBlockEntity(worldPosition) != this) {
+        assert null != this.level;
+        if (this.level.getBlockEntity(this.worldPosition) != this) {
             return false;
         } else {
-            return !(64.0D < pPlayer.distanceToSqr((double) worldPosition.getX() + 0.5D, (double) worldPosition.getY() + 0.5D, (double) worldPosition.getZ() + 0.5D));
+            return !(64.0D < pPlayer.distanceToSqr((double) this.worldPosition.getX() + 0.5D, (double) this.worldPosition.getY() + 0.5D, (double) this.worldPosition.getZ() + 0.5D));
         }
     }
 
@@ -117,31 +117,31 @@ public class TrashCanBlockEntity extends BaseContainerBlockEntity implements Tic
     }
 
     protected NonNullList<ItemStack> getItems() {
-        return items;
+        return this.items;
     }
 
     protected void setItems(final NonNullList<ItemStack> pItems) {
-        items = pItems;
+        this.items = pItems;
     }
 
     @NotNull
     @Override
     public <T> LazyOptional<T> getCapability(@NotNull final Capability<T> cap, final Direction side) {
-        if (!remove && cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            if (null == chestHandler)
-                chestHandler = LazyOptional.of(this::createHandler);
-            return chestHandler.cast();
+        if (!this.remove && cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            if (null == this.chestHandler)
+                this.chestHandler = LazyOptional.of(this::createHandler);
+            return this.chestHandler.cast();
         }
         return super.getCapability(cap, side);
     }
 
     @NotNull
     private IItemHandlerModifiable createHandler() {
-        final BlockState state = getBlockState();
+        final BlockState state = this.getBlockState();
         if (!(state.getBlock() instanceof ChestBlock)) {
             return new InvWrapper(this);
         }
-        final Container inv = ChestBlock.getContainer((ChestBlock) state.getBlock(), state, Objects.requireNonNull(getLevel()), getBlockPos(), true);
+        final Container inv = ChestBlock.getContainer((ChestBlock) state.getBlock(), state, Objects.requireNonNull(this.getLevel()), this.getBlockPos(), true);
         return new InvWrapper(null == inv ? this : inv);
     }
 
@@ -149,9 +149,9 @@ public class TrashCanBlockEntity extends BaseContainerBlockEntity implements Tic
     @SuppressWarnings("deprecation")
     public void setBlockState(@NotNull final BlockState blockState) {
         super.setBlockState(blockState);
-        if (null != chestHandler) {
-            final LazyOptional<?> oldHandler = chestHandler;
-            chestHandler = null;
+        if (null != this.chestHandler) {
+            final LazyOptional<?> oldHandler = this.chestHandler;
+            this.chestHandler = null;
             oldHandler.invalidate();
         }
     }
@@ -160,36 +160,36 @@ public class TrashCanBlockEntity extends BaseContainerBlockEntity implements Tic
     public void invalidateCaps() {
         super.invalidateCaps();
         if (null != this.chestHandler) {
-            chestHandler.invalidate();
-            chestHandler = null;
+            this.chestHandler.invalidate();
+            this.chestHandler = null;
         }
     }
 
     @Override
     public void clearContent() {
-        getItems().clear();
+        this.getItems().clear();
     }
 
     public void trash() {
-        if (isEmpty()) {
+        if (this.isEmpty()) {
             return;
         }
-        final int xp = calculateXp(level.getRandom());
+        final int xp = this.calculateXp(this.level.getRandom());
 
-        clearContent();
+        this.clearContent();
 
         if (null != this.level) {
-            level.playSound(null, worldPosition, SoundEvents.COMPOSTER_FILL_SUCCESS, SoundSource.BLOCKS, 1.0F, 1.0F);
+            this.level.playSound(null, this.worldPosition, SoundEvents.COMPOSTER_FILL_SUCCESS, SoundSource.BLOCKS, 1.0F, 1.0F);
         } else {
-            SmallUtilities.LOGGER.error(MARKER, "Tried to play sound at {} but level is null", worldPosition);
+            SmallUtilities.LOGGER.error(MARKER, "Tried to play sound at {} but level is null", this.worldPosition);
         }
 
-        level.addFreshEntity(new ExperienceOrb(level, worldPosition.getX() + 0.5, worldPosition.getY() + 1.5, worldPosition.getZ() + 0.5, xp));
+        this.level.addFreshEntity(new ExperienceOrb(this.level, this.worldPosition.getX() + 0.5, this.worldPosition.getY() + 1.5, this.worldPosition.getZ() + 0.5, xp));
     }
 
     public final int calculateXp(final Random random) {
-        final int min = calculateMaxXp() / getXpReduction();
-        final int max = calculateMaxXp();
+        final int min = this.calculateMaxXp() / this.getXpReduction();
+        final int max = this.calculateMaxXp();
         return random.nextInt(min, max);
     }
 
@@ -198,13 +198,13 @@ public class TrashCanBlockEntity extends BaseContainerBlockEntity implements Tic
     }
 
     public final int calculateMinXp() {
-        return calculateMaxXp() / getXpReduction();
+        return this.calculateMaxXp() / this.getXpReduction();
     }
 
     public int calculateMaxXp() {
         int xp = 0;
         for (int i = 0; TrashCanMenu.SLOTS > i; ++i) {
-            final ItemStack itemStack = items.get(i);
+            final ItemStack itemStack = this.items.get(i);
             if (!itemStack.isEmpty()) {
                 xp += itemStack.getCount() * (1 + EnchantmentHelper.getEnchantments(itemStack).keySet().stream().filter(enchantment -> !enchantment.isCurse()).count() * 2);
             }

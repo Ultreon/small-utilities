@@ -21,48 +21,48 @@ public class ModDutchLanguage extends LanguageProvider {
     @Override
     protected void addTranslations() {
         // Generic decorative blocks and stations.
-        addBlock(ModBlocks.LAPTOP, "Laptop");
-        addBlock(ModBlocks.IRON_GRID_PLATE, "IJzeren rasterplaat");
-        addBlock(ModBlocks.TRASH_CAN, "Vuilnisbak");
+        this.addBlock(ModBlocks.LAPTOP, "Laptop");
+        this.addBlock(ModBlocks.IRON_GRID_PLATE, "IJzeren rasterplaat");
+        this.addBlock(ModBlocks.TRASH_CAN, "Vuilnisbak");
 
-        addDamageSource(ModDamageSources.SLICED_BY_STONE_CUTTER, "%1$s werd gesneden door een steenzaag");
-        addDamageSource(ModDamageSources.TRASHED_THEMSELF, "%1$s heeft zichzelf verwijderd");
+        this.addDamageSource(ModDamageSources.SLICED_BY_STONE_CUTTER, "%1$s werd gesneden door een steenzaag");
+        this.addDamageSource(ModDamageSources.TRASHED_THEMSELF, "%1$s heeft zichzelf verwijderd");
 
         //***************************//
         //     Wood types blocks     //
         //***************************//
 
         // Coffee Tables
-        addBlock(ModBlocks.OAK_COFFEE_TABLE, "Eiken koffietafel");
-        addBlock(ModBlocks.BIRCH_COFFEE_TABLE, "Berken koffietafel");
-        addBlock(ModBlocks.SPRUCE_COFFEE_TABLE, "Sparren koffietafel");
-        addBlock(ModBlocks.JUNGLE_COFFEE_TABLE, "Oerwoudhouten koffietafel");
-        addBlock(ModBlocks.ACACIA_COFFEE_TABLE, "Acacia koffietafel");
-        addBlock(ModBlocks.DARK_OAK_COFFEE_TABLE, "Donkere eiken koffietafel");
+        this.addBlock(ModBlocks.OAK_COFFEE_TABLE, "Eiken koffietafel");
+        this.addBlock(ModBlocks.BIRCH_COFFEE_TABLE, "Berken koffietafel");
+        this.addBlock(ModBlocks.SPRUCE_COFFEE_TABLE, "Sparren koffietafel");
+        this.addBlock(ModBlocks.JUNGLE_COFFEE_TABLE, "Oerwoudhouten koffietafel");
+        this.addBlock(ModBlocks.ACACIA_COFFEE_TABLE, "Acacia koffietafel");
+        this.addBlock(ModBlocks.DARK_OAK_COFFEE_TABLE, "Donkere eiken koffietafel");
 
         // Tables
-        addBlock(ModBlocks.OAK_TABLE, "Eiken tafel");
-        addBlock(ModBlocks.BIRCH_TABLE, "Berken tafel");
-        addBlock(ModBlocks.SPRUCE_TABLE, "Sparren tafel");
-        addBlock(ModBlocks.JUNGLE_TABLE, "Oerwoudhouten tafel");
-        addBlock(ModBlocks.ACACIA_TABLE, "Acacia tafel");
-        addBlock(ModBlocks.DARK_OAK_TABLE, "Donkere eiken tafel");
+        this.addBlock(ModBlocks.OAK_TABLE, "Eiken tafel");
+        this.addBlock(ModBlocks.BIRCH_TABLE, "Berken tafel");
+        this.addBlock(ModBlocks.SPRUCE_TABLE, "Sparren tafel");
+        this.addBlock(ModBlocks.JUNGLE_TABLE, "Oerwoudhouten tafel");
+        this.addBlock(ModBlocks.ACACIA_TABLE, "Acacia tafel");
+        this.addBlock(ModBlocks.DARK_OAK_TABLE, "Donkere eiken tafel");
 
         for (final FutureDashboardBlock block : ModBlocks.getAllFutureDashboards().toList()) {
-            addBlock(() -> block, "Futuristische dashboard");
+            this.addBlock(() -> block, "Futuristische dashboard");
         }
 
-        addBlock(ModBlocks.FUTURE_DASHBOARD, "Futuristische dashboard");
+        this.addBlock(ModBlocks.FUTURE_DASHBOARD, "Futuristische dashboard");
 
-        add("container.smallutils.trash_can", "Vuilnisbak");
-        add("container.smallutils.trash_can.trash", "Verwijder");
-        add("container.smallutils.trash_can.delete_confirmation.title", "Verwijderings-bevestiging");
-        add("container.smallutils.trash_can.delete_confirmation.description", "Je probeert %d items te verwijderen, weet je zeker dat je dat wilt?");
-        add("container.smallutils.trash_can.delete_confirmation.description1", "Dit gaat je tussen %d en %d XP opleveren.");
+        this.add("container.smallutils.trash_can", "Vuilnisbak");
+        this.add("container.smallutils.trash_can.trash", "Verwijder");
+        this.add("container.smallutils.trash_can.delete_confirmation.title", "Verwijderings-bevestiging");
+        this.add("container.smallutils.trash_can.delete_confirmation.description", "Je probeert %d items te verwijderen, weet je zeker dat je dat wilt?");
+        this.add("container.smallutils.trash_can.delete_confirmation.description1", "Dit gaat je tussen %d en %d XP opleveren.");
     }
 
     private void addDamageSource(final DamageSource key, final String name) {
-        add("death.attack." + key.msgId, name);
-        add("death.attack." + key.msgId + ".player", name + " om %2$s te ontlopen");
+        this.add("death.attack." + key.msgId, name);
+        this.add("death.attack." + key.msgId + ".player", name + " om %2$s te ontlopen");
     }
 }

@@ -21,34 +21,34 @@ public class TrashCanScreen extends AbstractContainerScreen<TrashCanMenu> {
     public TrashCanScreen(final TrashCanMenu menu, final Inventory inventory, final Component title) {
         super(menu, inventory, title);
 
-        imageWidth = 176;
-        imageHeight = 133;
-        inventoryLabelY = imageHeight - 94;
+        this.imageWidth = 176;
+        this.imageHeight = 133;
+        this.inventoryLabelY = this.imageHeight - 94;
     }
 
     @Override
     protected void init() {
-        final int x = (width - imageWidth) / 2;
-        final int y = (height - imageHeight) / 2;
+        final int x = (this.width - this.imageWidth) / 2;
+        final int y = (this.height - this.imageHeight) / 2;
 
         super.init();
 
-        addRenderableWidget(new Button(x + 99, y + 16, 70, 20, TRASH_TEXT, (button) -> {
+        this.addRenderableWidget(new Button(x + 99, y + 16, 70, 20, TRASH_TEXT, (button) -> {
             if (null != this.minecraft) {
-                minecraft.pushGuiLayer(new DeleteConfirmationScreen(this));
+                this.minecraft.pushGuiLayer(new DeleteConfirmationScreen(this));
             }
         }));
     }
 
     @Override
     protected void renderBg(@NotNull final PoseStack poseStack, final float pPartialTick, final int pMouseX, final int pMouseY) {
-        if (!(Objects.requireNonNull(minecraft).screen instanceof DeleteConfirmationScreen)) {
-            renderBackground(poseStack);
+        if (!(Objects.requireNonNull(this.minecraft).screen instanceof DeleteConfirmationScreen)) {
+            this.renderBackground(poseStack);
         }
 
         RenderSystem.setShaderTexture(0, TEXTURE);
-        final int x = (width - imageWidth) / 2;
-        final int y = (height - imageHeight) / 2;
-        blit(poseStack, x, y, 0, 0, imageWidth, imageHeight);
+        final int x = (this.width - this.imageWidth) / 2;
+        final int y = (this.height - this.imageHeight) / 2;
+        this.blit(poseStack, x, y, 0, 0, this.imageWidth, this.imageHeight);
     }
 }

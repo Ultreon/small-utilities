@@ -21,48 +21,48 @@ public class ModEnglishLanguage extends LanguageProvider {
     @Override
     protected void addTranslations() {
         // Generic decorative blocks and stations.
-        addBlock(ModBlocks.LAPTOP, "Laptop");
-        addBlock(ModBlocks.IRON_GRID_PLATE, "Iron Grid Plate");
-        addBlock(ModBlocks.TRASH_CAN, "Trash Can");
+        this.addBlock(ModBlocks.LAPTOP, "Laptop");
+        this.addBlock(ModBlocks.IRON_GRID_PLATE, "Iron Grid Plate");
+        this.addBlock(ModBlocks.TRASH_CAN, "Trash Can");
 
-        addDamageSource(ModDamageSources.SLICED_BY_STONE_CUTTER, "%1$s was sliced by a stone cutter");
-        addDamageSource(ModDamageSources.TRASHED_THEMSELF, "%1$s has trashed themself");
+        this.addDamageSource(ModDamageSources.SLICED_BY_STONE_CUTTER, "%1$s was sliced by a stone cutter");
+        this.addDamageSource(ModDamageSources.TRASHED_THEMSELF, "%1$s has trashed themself");
 
         //***************************//
         //     Wood types blocks     //
         //***************************//
 
         // Coffee Tables
-        addBlock(ModBlocks.OAK_COFFEE_TABLE, "Oak Coffee Table");
-        addBlock(ModBlocks.BIRCH_COFFEE_TABLE, "Birch Coffee Table");
-        addBlock(ModBlocks.SPRUCE_COFFEE_TABLE, "Spruce Coffee Table");
-        addBlock(ModBlocks.JUNGLE_COFFEE_TABLE, "Jungle Coffee Table");
-        addBlock(ModBlocks.ACACIA_COFFEE_TABLE, "Acacia Coffee Table");
-        addBlock(ModBlocks.DARK_OAK_COFFEE_TABLE, "Dark Oak Coffee Table");
+        this.addBlock(ModBlocks.OAK_COFFEE_TABLE, "Oak Coffee Table");
+        this.addBlock(ModBlocks.BIRCH_COFFEE_TABLE, "Birch Coffee Table");
+        this.addBlock(ModBlocks.SPRUCE_COFFEE_TABLE, "Spruce Coffee Table");
+        this.addBlock(ModBlocks.JUNGLE_COFFEE_TABLE, "Jungle Coffee Table");
+        this.addBlock(ModBlocks.ACACIA_COFFEE_TABLE, "Acacia Coffee Table");
+        this.addBlock(ModBlocks.DARK_OAK_COFFEE_TABLE, "Dark Oak Coffee Table");
 
         // Tables
-        addBlock(ModBlocks.OAK_TABLE, "Oak Table");
-        addBlock(ModBlocks.BIRCH_TABLE, "Birch Table");
-        addBlock(ModBlocks.SPRUCE_TABLE, "Spruce Table");
-        addBlock(ModBlocks.JUNGLE_TABLE, "Jungle Table");
-        addBlock(ModBlocks.ACACIA_TABLE, "Acacia Table");
-        addBlock(ModBlocks.DARK_OAK_TABLE, "Dark Oak Table");
+        this.addBlock(ModBlocks.OAK_TABLE, "Oak Table");
+        this.addBlock(ModBlocks.BIRCH_TABLE, "Birch Table");
+        this.addBlock(ModBlocks.SPRUCE_TABLE, "Spruce Table");
+        this.addBlock(ModBlocks.JUNGLE_TABLE, "Jungle Table");
+        this.addBlock(ModBlocks.ACACIA_TABLE, "Acacia Table");
+        this.addBlock(ModBlocks.DARK_OAK_TABLE, "Dark Oak Table");
 
         for (final FutureDashboardBlock block : ModBlocks.getAllFutureDashboards().toList()) {
-            addBlock(() -> block, "Future Dashboard");
+            this.addBlock(() -> block, "Future Dashboard");
         }
 
-        addBlock(ModBlocks.FUTURE_DASHBOARD, "Future Dashboard");
+        this.addBlock(ModBlocks.FUTURE_DASHBOARD, "Future Dashboard");
 
-        add("container.smallutils.trash_can", "Trash Can");
-        add("container.smallutils.trash_can.trash", "Trash");
-        add("container.smallutils.trash_can.delete_confirmation.title", "Delete Confirmation");
-        add("container.smallutils.trash_can.delete_confirmation.description", "You're deleting %d items, are you sure you want to delete them?");
-        add("container.smallutils.trash_can.delete_confirmation.description1", "This will grant you between %d and %d XP.");
+        this.add("container.smallutils.trash_can", "Trash Can");
+        this.add("container.smallutils.trash_can.trash", "Trash");
+        this.add("container.smallutils.trash_can.delete_confirmation.title", "Delete Confirmation");
+        this.add("container.smallutils.trash_can.delete_confirmation.description", "You're deleting %d items, are you sure you want to delete them?");
+        this.add("container.smallutils.trash_can.delete_confirmation.description1", "This will grant you between %d and %d XP.");
     }
 
     private void addDamageSource(final DamageSource key, final String name) {
-        add("death.attack." + key.msgId, name);
-        add("death.attack." + key.msgId + ".player", name + " whilst fighting %2$s");
+        this.add("death.attack." + key.msgId, name);
+        this.add("death.attack." + key.msgId + ".player", name + " whilst fighting %2$s");
     }
 }

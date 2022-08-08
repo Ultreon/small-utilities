@@ -34,7 +34,7 @@ public class TrashCanMenu extends AbstractContainerMenu {
         container.startOpen(inventory.player);
 
         for (int k = 0; SLOTS > k; ++k) {
-            addSlot(new Slot(container, k, 8 + k * 18, 18) {
+            this.addSlot(new Slot(container, k, 8 + k * 18, 18) {
                 @Override
                 public boolean mayPlace(final ItemStack stack) {
                     return !stack.is(ModTags.Items.TRASH_BLACKLIST);
@@ -44,19 +44,19 @@ public class TrashCanMenu extends AbstractContainerMenu {
 
         for (int l = 0; 3 > l; ++l) {
             for (int j1 = 0; 9 > j1; ++j1) {
-                addSlot(new Slot(inventory, j1 + l * 9 + 9, 8 + j1 * 18, 103 + l * 18 - 52));
+                this.addSlot(new Slot(inventory, j1 + l * 9 + 9, 8 + j1 * 18, 103 + l * 18 - 52));
             }
         }
 
         for (int i1 = 0; 9 > i1; ++i1) {
-            addSlot(new Slot(inventory, i1, 8 + i1 * 18, 161 - 52));
+            this.addSlot(new Slot(inventory, i1, 8 + i1 * 18, 161 - 52));
         }
     }
 
     @Override
     public boolean clickMenuButton(@NotNull final Player player, final int id) {
         if (0 == id) {
-            trash();
+            this.trash();
             return true;
         }
         return false;
@@ -69,15 +69,15 @@ public class TrashCanMenu extends AbstractContainerMenu {
     @NotNull
     public ItemStack quickMoveStack(@NotNull final Player player, final int index) {
         ItemStack remainder = ItemStack.EMPTY;
-        final Slot output = slots.get(index);
+        final Slot output = this.slots.get(index);
         if (output.hasItem()) {
             final ItemStack dest = output.getItem();
             remainder = dest.copy();
             if (5 > index) {
-                if (!moveItemStackTo(dest, 5, slots.size(), true)) {
+                if (!this.moveItemStackTo(dest, 5, this.slots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!moveItemStackTo(dest, 0, 5, false)) {
+            } else if (!this.moveItemStackTo(dest, 0, 5, false)) {
                 return ItemStack.EMPTY;
             }
 
@@ -93,7 +93,7 @@ public class TrashCanMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(@NotNull final Player player) {
-        return container.stillValid(player);
+        return this.container.stillValid(player);
     }
 
     /**
@@ -101,7 +101,7 @@ public class TrashCanMenu extends AbstractContainerMenu {
      */
     public void removed(@NotNull final Player player) {
         super.removed(player);
-        container.stopOpen(player);
+        this.container.stopOpen(player);
     }
 
     /**
@@ -110,12 +110,12 @@ public class TrashCanMenu extends AbstractContainerMenu {
      * @see #container
      */
     public Container getContainer() {
-        return container;
+        return this.container;
     }
 
 
     public void trash() {
-        access.execute((level, blockPos) -> {
+        this.access.execute((level, blockPos) -> {
             level.getBlockEntity(blockPos, ModBlockEntities.TRASH_CAN.get()).ifPresent(trashCan -> {
                 trashCan.trash();
 //                for (int i = 0; i < SLOTS; i++) {
@@ -129,8 +129,8 @@ public class TrashCanMenu extends AbstractContainerMenu {
     }
 
     public final int calculateXp(final Random random) {
-        final int min = calculateMaxXp() / getXpReduction();
-        final int max = calculateMaxXp();
+        final int min = this.calculateMaxXp() / this.getXpReduction();
+        final int max = this.calculateMaxXp();
         return random.nextInt(min, max);
     }
 
@@ -139,13 +139,13 @@ public class TrashCanMenu extends AbstractContainerMenu {
     }
 
     public final int calculateMinXp() {
-        return calculateMaxXp() / getXpReduction();
+        return this.calculateMaxXp() / this.getXpReduction();
     }
 
     public int calculateMaxXp() {
         int xp = 0;
         for (int i = 0; SLOTS > i; ++i) {
-            final ItemStack itemStack = slots.get(i).getItem();
+            final ItemStack itemStack = this.slots.get(i).getItem();
             if (!itemStack.isEmpty()) {
                 xp += itemStack.getCount() * (1 + EnchantmentHelper.getEnchantments(itemStack).keySet().stream().filter(enchantment -> !enchantment.isCurse()).count() * 2);
             }
@@ -156,7 +156,7 @@ public class TrashCanMenu extends AbstractContainerMenu {
     public int getTrashItemCount() {
         int count = 0;
         for (int i = 0; SLOTS > i; ++i) {
-            final ItemStack itemStack = slots.get(i).getItem();
+            final ItemStack itemStack = this.slots.get(i).getItem();
             if (!itemStack.isEmpty()) {
                 count += itemStack.getCount();
             }
