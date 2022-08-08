@@ -1,5 +1,6 @@
 package com.ultreon.mods.smallutilities.block;
 
+import com.ultreon.mods.smallutilities.Config;
 import com.ultreon.mods.smallutilities.block.entity.TrashCanBlockEntity;
 import com.ultreon.mods.smallutilities.init.ModBlockEntities;
 import com.ultreon.mods.smallutilities.init.ModStats;
@@ -53,7 +54,11 @@ public class TrashCanBlock extends Block implements EntityBlock {
     }
 
     @NotNull
-    public InteractionResult use(@NotNull final BlockState state, final Level level, @NotNull final BlockPos pos, @NotNull final Player player, @NotNull final InteractionHand hand, @NotNull final BlockHitResult hit) {
+    public InteractionResult use(@NotNull final BlockState state, final @NotNull Level level, @NotNull final BlockPos pos, @NotNull final Player player, @NotNull final InteractionHand hand, @NotNull final BlockHitResult hit) {
+        if (!Config.ENABLE_TRASH_CAN.get()) {
+            return InteractionResult.PASS;
+        }
+
         if (level.isClientSide) {
             return InteractionResult.SUCCESS;
         } else {
@@ -68,7 +73,11 @@ public class TrashCanBlock extends Block implements EntityBlock {
         }
     }
 
-    public void neighborChanged(@NotNull final BlockState state, final Level level, @NotNull final BlockPos pos, @NotNull final Block block, @NotNull final BlockPos fromPos, final boolean isMoving) {
+    public void neighborChanged(@NotNull final BlockState state, final @NotNull Level level, @NotNull final BlockPos pos, @NotNull final Block block, @NotNull final BlockPos fromPos, final boolean isMoving) {
+        if (!Config.ENABLE_TRASH_CAN.get()) {
+            return;
+        }
+
         final boolean flag = level.hasNeighborSignal(pos);
         if (!this.defaultBlockState().is(block) && flag != state.getValue(POWERED)) {
             if (flag && !state.getValue(POWERED)) {
@@ -82,7 +91,11 @@ public class TrashCanBlock extends Block implements EntityBlock {
 
     @Nullable
     @Override
-    public MenuProvider getMenuProvider(@NotNull final BlockState state, final Level level, @NotNull final BlockPos pos) {
+    public MenuProvider getMenuProvider(@NotNull final BlockState state, final @NotNull Level level, @NotNull final BlockPos pos) {
+        if (!Config.ENABLE_TRASH_CAN.get()) {
+            return null;
+        }
+
         final BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof TrashCanBlockEntity) {
             return ((TrashCanBlockEntity) blockEntity);
