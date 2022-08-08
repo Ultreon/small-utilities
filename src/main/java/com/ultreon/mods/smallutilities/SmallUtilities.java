@@ -1,9 +1,6 @@
 package com.ultreon.mods.smallutilities;
 
-import com.mojang.logging.LogUtils;
-import com.ultreon.mods.smallutilities.init.ModBlocks;
-import com.ultreon.mods.smallutilities.init.ModItems;
-import com.ultreon.mods.smallutilities.init.ModTags;
+import com.ultreon.mods.smallutilities.init.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.MinecraftForge;
@@ -17,6 +14,7 @@ import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,7 +34,7 @@ import java.util.Locale;
 @Mod(SmallUtilities.MOD_ID)
 public class SmallUtilities {
     public static final String MOD_ID = "smallutils";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LoggerFactory.getLogger("SmallUtils");
 
     private static final List<Block> CUTTER_BLOCKS = new ArrayList<>();
 
@@ -47,8 +45,8 @@ public class SmallUtilities {
      * @since 1.0.0
      */
     public SmallUtilities() {
-        IEventBus modEvents = FMLJavaModLoadingContext.get().getModEventBus();
-        IEventBus forgeEvents = MinecraftForge.EVENT_BUS;
+        final IEventBus modEvents = FMLJavaModLoadingContext.get().getModEventBus();
+        final IEventBus forgeEvents = MinecraftForge.EVENT_BUS;
 
         // Register the setup method for modloading
         modEvents.addListener(this::commonSetup);
@@ -62,6 +60,9 @@ public class SmallUtilities {
 
         ModBlocks.register(modEvents);
         ModItems.register(modEvents);
+        ModMenus.register(modEvents);
+        ModBlockEntities.register(modEvents);
+        ModStats.register(modEvents);
         ModTags.init();
 
         Config.init();
@@ -75,7 +76,7 @@ public class SmallUtilities {
      * @author Qboi123
      * @since 1.0.0-dev4
      */
-    public static ResourceLocation res(String path) {
+    public static ResourceLocation res(final String path) {
         return new ResourceLocation(MOD_ID, path);
     }
 
@@ -104,19 +105,19 @@ public class SmallUtilities {
         event.getIMCStream().forEachOrdered(this::imcMessageHandle);
     }
 
-    private void imcMessageHandle(InterModComms.IMCMessage action) {
+    private void imcMessageHandle(final InterModComms.IMCMessage action) {
         switch (action.method().toLowerCase(Locale.ROOT)) {
             case "hello_world" -> imcHelloWorld(action);
             case "register:cutter_block" -> imcRegisterCutterBlock(action);
         }
     }
 
-    private void imcHelloWorld(InterModComms.IMCMessage action) {
+    private void imcHelloWorld(final InterModComms.IMCMessage action) {
         LOGGER.info("Hello, " + action.senderModId());
     }
 
-    private void imcRegisterCutterBlock(InterModComms.IMCMessage action) {
-        Object o = action.messageSupplier().get();
+    private void imcRegisterCutterBlock(final InterModComms.IMCMessage action) {
+        final Object o = action.messageSupplier().get();
         if (o instanceof Block) {
             CUTTER_BLOCKS.add((Block) o);
         } else {
@@ -133,13 +134,13 @@ public class SmallUtilities {
      * @since 1.0.0
      */
     @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event) {
+    public void onServerStarting(final ServerStartingEvent event) {
         // Do some server starting things
 
         LOGGER.info("HELLO from server starting");
     }
 
-    public void registerCutterBlock(Block block) {
+    public void registerCutterBlock(final Block block) {
         CUTTER_BLOCKS.add(block);
     }
 

@@ -1,83 +1,118 @@
 package com.ultreon.mods.smallutilities.block;
 
-import com.ultreon.mods.smallutilities.Config;
-import com.ultreon.mods.smallutilities.init.ModTags;
+import com.ultreon.mods.smallutilities.block.entity.TrashCanBlockEntity;
+import com.ultreon.mods.smallutilities.init.ModBlockEntities;
+import com.ultreon.mods.smallutilities.init.ModStats;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.ExperienceOrb;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.monster.piglin.PiglinAi;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("deprecation")
-public class TrashCanBlock extends Block {
+public class TrashCanBlock extends Block implements EntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+    private static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
     private static final VoxelShape SHAPE = Block.box(1, 0, 1, 15, 16, 15);
+    private final RegistryObject<BlockEntityType<TrashCanBlockEntity>> blockEntityType = ModBlockEntities.TRASH_CAN;
 
-    public TrashCanBlock(Properties properties) {
+    public TrashCanBlock(final Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH)/*.setValue(CLOSED, true)*/);
+        registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(POWERED, false));
     }
 
-    public boolean canSurvive(@NotNull BlockState pState, @NotNull LevelReader pLevel, BlockPos pPos) {
-        BlockPos blockpos = pPos.below();
-        return canSupportRigidBlock(pLevel, blockpos) || canSupportCenter(pLevel, blockpos, Direction.UP);
+    public boolean canSurvive(@NotNull final BlockState state, @NotNull final LevelReader level, final BlockPos pos) {
+        final BlockPos blockpos = pos.below();
+        return Block.canSupportRigidBlock(level, blockpos) || Block.canSupportCenter(level, blockpos, Direction.UP);
+    }
+
+    @NotNull
+    public InteractionResult use(@NotNull final BlockState state, final Level level, @NotNull final BlockPos pos, @NotNull final Player player, @NotNull final InteractionHand hand, @NotNull final BlockHitResult hit) {
+        if (level.isClientSide) {
+            return InteractionResult.SUCCESS;
+        } else {
+            final MenuProvider menuprovider = getMenuProvider(state, level, pos);
+            if (null != menuprovider) {
+                player.openMenu(menuprovider);
+                player.awardStat(getOpenTrashCanStat());
+                PiglinAi.angerNearbyPiglins(player, true);
+            }
+
+            return InteractionResult.CONSUME;
+        }
+    }
+
+    public void neighborChanged(@NotNull final BlockState state, final Level level, @NotNull final BlockPos pos, @NotNull final Block block, @NotNull final BlockPos fromPos, final boolean isMoving) {
+        final boolean flag = level.hasNeighborSignal(pos);
+        if (!defaultBlockState().is(block) && flag != state.getValue(POWERED)) {
+            if (flag && !state.getValue(POWERED)) {
+                level.getBlockEntity(pos, ModBlockEntities.TRASH_CAN.get()).ifPresent(TrashCanBlockEntity::trash);
+            }
+
+            level.setBlock(pos, state.setValue(POWERED, flag), 2);
+        }
+
+    }
+
+    @Nullable
+    @Override
+    public MenuProvider getMenuProvider(@NotNull final BlockState state, final Level level, @NotNull final BlockPos pos) {
+        final BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof TrashCanBlockEntity) {
+            return ((TrashCanBlockEntity) blockEntity);
+        }
+        return null;
+    }
+
+    @NotNull
+    public BlockEntityType<TrashCanBlockEntity> blockEntityType() {
+        return blockEntityType.get();
+    }
+
+    private ResourceLocation getOpenTrashCanStat() {
+        return ModStats.OPEN_TRASH_CAN.get();
     }
 
     @NotNull
     @Override
-    public VoxelShape getShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
+    public VoxelShape getShape(@NotNull final BlockState state, @NotNull final BlockGetter level, @NotNull final BlockPos pos, @NotNull final CollisionContext context) {
         return SHAPE;
     }
 
     @NotNull
-    public VoxelShape getOcclusionShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos) {
+    public VoxelShape getOcclusionShape(@NotNull final BlockState state, @NotNull final BlockGetter level, @NotNull final BlockPos pos) {
         return Shapes.empty();
     }
 
-    public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
-    }
-
-    @NotNull
-    @Override
-    public InteractionResult use(@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull Player pPlayer, @NotNull InteractionHand pHand, @NotNull BlockHitResult pHit) {
-        if (Config.ENABLE_TRASH_CAN.get()) {
-            ItemStack itemInHand = pPlayer.getItemInHand(pHand);
-            if (itemInHand.isEmpty()) return InteractionResult.PASS;
-            if (itemInHand.is(ModTags.Items.TRASH_BLACKLIST)) return InteractionResult.FAIL;
-
-            if (pPlayer.isCrouching()) itemInHand.setCount(0);
-            else itemInHand.shrink(1);
-
-            if (pPlayer.getRandom().nextInt(30) == 0)
-                pLevel.addFreshEntity(new ExperienceOrb(pLevel, pPos.getX() + 0.5, pPos.getY() + 1.5, pPos.getZ() + 0.5, 1));
-
-            pLevel.playSound(pPlayer, pPos, SoundEvents.COMPOSTER_FILL_SUCCESS, SoundSource.BLOCKS, 1.0F, 1.0F);
-            return InteractionResult.CONSUME;
-        } else {
-            return InteractionResult.PASS;
-        }
+    public BlockState getStateForPlacement(final BlockPlaceContext context) {
+        final boolean flag = context.getLevel().hasNeighborSignal(context.getClickedPos());
+        return defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite()).setValue(POWERED, flag);
     }
 
     /**
@@ -86,8 +121,8 @@ public class TrashCanBlock extends Block {
      * possible. Implementing/overriding is fine.
      */
     @NotNull
-    public BlockState rotate(BlockState pState, Rotation pRotation) {
-        return pState.setValue(FACING, pRotation.rotate(pState.getValue(FACING)));
+    public BlockState rotate(final BlockState state, final Rotation rotation) {
+        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
     }
 
     /**
@@ -96,12 +131,17 @@ public class TrashCanBlock extends Block {
      * possible. Implementing/overriding is fine.
      */
     @NotNull
-    public BlockState mirror(BlockState pState, Mirror pMirror) {
-        return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
+    public BlockState mirror(final BlockState state, final Mirror mirror) {
+        return state.rotate(mirror.getRotation(state.getValue(FACING)));
     }
 
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-//        pBuilder.add(FACING, CLOSED);
-        pBuilder.add(FACING);
+    protected void createBlockStateDefinition(final StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(FACING, POWERED);
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(@NotNull final BlockPos position, @NotNull final BlockState state) {
+        return new TrashCanBlockEntity(position, state);
     }
 }

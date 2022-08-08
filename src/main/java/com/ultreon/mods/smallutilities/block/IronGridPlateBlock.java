@@ -33,16 +33,16 @@ public class IronGridPlateBlock extends Block implements SimpleWaterloggedBlock 
     private static final VoxelShape TOP = Block.box(0, 14, 0, 16, 16, 16);
     private static final VoxelShape BOTTOM = Block.box(0, 0, 0, 16, 2, 16);
 
-    public IronGridPlateBlock(Properties properties) {
+    public IronGridPlateBlock(final Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(HALF, Half.BOTTOM).setValue(WATERLOGGED, Boolean.FALSE));
+        registerDefaultState(stateDefinition.any().setValue(HALF, Half.BOTTOM).setValue(WATERLOGGED, Boolean.FALSE));
     }
 
     @Override
-    public void fillItemCategory(CreativeModeTab pTab, NonNullList<ItemStack> pItems) {
-        ArrayList<ItemStack> itemStacks = new ArrayList<>(pItems);
+    public void fillItemCategory(final CreativeModeTab pTab, final NonNullList<ItemStack> pItems) {
+        final ArrayList<ItemStack> itemStacks = new ArrayList<>(pItems);
         for (int i = 0, itemStacksSize = itemStacks.size(); i < itemStacksSize; i++) {
-            ItemStack stack = itemStacks.get(i);
+            final ItemStack stack = itemStacks.get(i);
             if (stack.getItem() == Items.IRON_BARS) {
                 pItems.add(i + 1, new ItemStack(this));
                 return;
@@ -51,37 +51,37 @@ public class IronGridPlateBlock extends Block implements SimpleWaterloggedBlock 
         super.fillItemCategory(pTab, pItems);
     }
 
-    public boolean isPathfindable(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull PathComputationType pType) {
-        return pType == PathComputationType.WATER ? pState.getValue(WATERLOGGED) : false;
+    public boolean isPathfindable(@NotNull final BlockState pState, @NotNull final BlockGetter pLevel, @NotNull final BlockPos pPos, @NotNull final PathComputationType pType) {
+        return PathComputationType.WATER == pType ? pState.getValue(WATERLOGGED) : false;
     }
 
     @Override
-    public @NotNull VoxelShape getShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
+    public @NotNull VoxelShape getShape(@NotNull final BlockState pState, @NotNull final BlockGetter pLevel, @NotNull final BlockPos pPos, @NotNull final CollisionContext pContext) {
         return switch (pState.getValue(HALF)) {
             case TOP -> TOP;
             case BOTTOM -> BOTTOM;
         };
     }
 
-    public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        BlockState blockstate = this.defaultBlockState();
-        FluidState fluidstate = pContext.getLevel().getFluidState(pContext.getClickedPos());
-        Direction direction = pContext.getClickedFace();
+    public BlockState getStateForPlacement(final BlockPlaceContext pContext) {
+        BlockState blockstate = defaultBlockState();
+        final FluidState fluidstate = pContext.getLevel().getFluidState(pContext.getClickedPos());
+        final Direction direction = pContext.getClickedFace();
         if (!pContext.replacingClickedOnBlock() && direction.getAxis().isHorizontal()) {
-            blockstate = blockstate.setValue(HALF, pContext.getClickLocation().y - (double) pContext.getClickedPos().getY() > 0.5D ? Half.TOP : Half.BOTTOM);
+            blockstate = blockstate.setValue(HALF, 0.5D < pContext.getClickLocation().y - (double) pContext.getClickedPos().getY() ? Half.TOP : Half.BOTTOM);
         } else {
-            blockstate = blockstate.setValue(HALF, direction == Direction.UP ? Half.BOTTOM : Half.TOP);
+            blockstate = blockstate.setValue(HALF, Direction.UP == direction ? Half.BOTTOM : Half.TOP);
         }
 
         return blockstate.setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER);
     }
 
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+    protected void createBlockStateDefinition(final StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(HALF, WATERLOGGED);
     }
 
     @NotNull
-    public FluidState getFluidState(BlockState pState) {
+    public FluidState getFluidState(final BlockState pState) {
         return pState.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(pState);
     }
 
@@ -92,7 +92,7 @@ public class IronGridPlateBlock extends Block implements SimpleWaterloggedBlock 
      * Note that this method should ideally consider only the specific direction passed in.
      */
     @NotNull
-    public BlockState updateShape(BlockState pState, @NotNull Direction pFacing, @NotNull BlockState pFacingState, @NotNull LevelAccessor pLevel, @NotNull BlockPos pCurrentPos, @NotNull BlockPos pFacingPos) {
+    public BlockState updateShape(final BlockState pState, @NotNull final Direction pFacing, @NotNull final BlockState pFacingState, @NotNull final LevelAccessor pLevel, @NotNull final BlockPos pCurrentPos, @NotNull final BlockPos pFacingPos) {
         if (pState.getValue(WATERLOGGED)) {
             pLevel.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
         }

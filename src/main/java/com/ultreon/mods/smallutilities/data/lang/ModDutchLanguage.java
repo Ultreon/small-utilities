@@ -10,11 +10,11 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.LanguageProvider;
 
 public class ModDutchLanguage extends LanguageProvider {
-    public ModDutchLanguage(DataGenerator generator, ExistingFileHelper exFileHelper, String country) {
+    public ModDutchLanguage(final DataGenerator generator, final ExistingFileHelper exFileHelper, final String country) {
         super(generator, SmallUtilities.MOD_ID, "nl_" + country);
     }
 
-    public static ModDutchLanguage ofCountry(DataGenerator generator, ExistingFileHelper exFileHelper, String country) {
+    public static ModDutchLanguage ofCountry(final DataGenerator generator, final ExistingFileHelper exFileHelper, final String country) {
         return new ModDutchLanguage(generator, exFileHelper, country);
     }
 
@@ -48,14 +48,20 @@ public class ModDutchLanguage extends LanguageProvider {
         addBlock(ModBlocks.ACACIA_TABLE, "Acacia tafel");
         addBlock(ModBlocks.DARK_OAK_TABLE, "Donkere eiken tafel");
 
-        for (FutureDashboardBlock block : ModBlocks.getAllFutureDashboards().toList()) {
+        for (final FutureDashboardBlock block : ModBlocks.getAllFutureDashboards().toList()) {
             addBlock(() -> block, "Futuristische dashboard");
         }
 
         addBlock(ModBlocks.FUTURE_DASHBOARD, "Futuristische dashboard");
+
+        add("container.smallutils.trash_can", "Vuilnisbak");
+        add("container.smallutils.trash_can.trash", "Verwijder");
+        add("container.smallutils.trash_can.delete_confirmation.title", "Verwijderings-bevestiging");
+        add("container.smallutils.trash_can.delete_confirmation.description", "Je probeert %d items te verwijderen, weet je zeker dat je dat wilt?");
+        add("container.smallutils.trash_can.delete_confirmation.description1", "Dit gaat je tussen %d en %d XP opleveren.");
     }
 
-    private void addDamageSource(DamageSource key, String name) {
+    private void addDamageSource(final DamageSource key, final String name) {
         add("death.attack." + key.msgId, name);
         add("death.attack." + key.msgId + ".player", name + " om %2$s te ontlopen");
     }

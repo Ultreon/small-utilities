@@ -17,9 +17,9 @@ import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = SmallUtilities.MOD_ID)
 public class ModDataGen {
     @SubscribeEvent
-    public static void gatherData(GatherDataEvent event) {
-        DataGenerator generator = event.getGenerator();
-        ExistingFileHelper exFileHelper = event.getExistingFileHelper();
+    public static void gatherData(final GatherDataEvent event) {
+        final DataGenerator generator = event.getGenerator();
+        final ExistingFileHelper exFileHelper = event.getExistingFileHelper();
 
         generator.addProvider(new ModBlockStates(generator, exFileHelper));
         generator.addProvider(new ModItemModels(generator, exFileHelper));

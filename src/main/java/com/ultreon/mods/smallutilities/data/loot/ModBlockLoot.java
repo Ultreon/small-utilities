@@ -7,7 +7,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class ModBlockLoot extends BlockLoot {
     public ModBlockLoot() {
-        super();
     }
 
     @Override

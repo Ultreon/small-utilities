@@ -18,7 +18,7 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class ModLoot extends LootTableProvider {
-    public ModLoot(DataGenerator dataGeneratorIn) {
+    public ModLoot(final DataGenerator dataGeneratorIn) {
         super(dataGeneratorIn);
     }
 
@@ -35,7 +35,7 @@ public class ModLoot extends LootTableProvider {
     }
 
     @Override
-    protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext ctx) {
+    protected void validate(final Map<ResourceLocation, LootTable> map, final ValidationContext ctx) {
         map.forEach((id, table) -> LootTables.validate(ctx, id, table));
     }
 }

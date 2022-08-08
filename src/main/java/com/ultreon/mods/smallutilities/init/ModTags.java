@@ -17,7 +17,7 @@ public class ModTags {
     public static class EntityTypes {
 //        public static final TagKey<EntityType<?>> BUG = tag("bug");
 
-        private static TagKey<EntityType<?>> tag(String name) {
+        private static TagKey<EntityType<?>> tag(final String name) {
             return TagKey.create(Registry.ENTITY_TYPE_REGISTRY, SmallUtilities.res(name));
         }
 
@@ -28,7 +28,7 @@ public class ModTags {
 
     public static class Blocks {
 
-        private static TagKey<Block> tag(String name) {
+        private static TagKey<Block> tag(final String name) {
             return BlockTags.create(SmallUtilities.res(name));
         }
 
@@ -40,7 +40,7 @@ public class ModTags {
     public static class Items {
         public static final TagKey<Item> TRASH_BLACKLIST = tag("trash_blacklist");
 
-        private static TagKey<Item> tag(String name) {
+        private static TagKey<Item> tag(final String name) {
             return ItemTags.create(SmallUtilities.res(name));
         }
 

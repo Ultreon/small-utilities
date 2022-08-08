@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Objects;
 
 public class ModBlockStates extends BlockStateProvider {
-    public ModBlockStates(DataGenerator generator, ExistingFileHelper exFileHelper) {
+    public ModBlockStates(final DataGenerator generator, final ExistingFileHelper exFileHelper) {
         super(generator, SmallUtilities.MOD_ID, exFileHelper);
 
     }
@@ -41,14 +41,14 @@ public class ModBlockStates extends BlockStateProvider {
         table(ModBlocks.ACACIA_TABLE.get(), "acacia");
         table(ModBlocks.DARK_OAK_TABLE.get(), "dark_oak");
 
-        for (char c = 'a'; c <= 'z'; c++) {
+        for (char c = 'a'; 'z' >= c; c++) {
             futureDashboard(ModBlocks.getFutureDashboard(c), Character.toString(c));
         }
     }
 
-    private void coffeeTable(Block block, String type) {
+    private void coffeeTable(final Block block, final String type) {
         getVariantBuilder(block).forAllStates(state -> {
-            String name = Objects.requireNonNull(block.getRegistryName()).getPath();
+            final String name = Objects.requireNonNull(block.getRegistryName()).getPath();
             return ConfiguredModel.builder()
                     .modelFile(models()
                             .withExistingParent(name, modLoc("block/coffee_table"))
@@ -59,9 +59,9 @@ public class ModBlockStates extends BlockStateProvider {
         });
     }
 
-    private void table(Block block, String type) {
+    private void table(final Block block, final String type) {
         getVariantBuilder(block).forAllStates(state -> {
-            String name = Objects.requireNonNull(block.getRegistryName()).getPath();
+            final String name = Objects.requireNonNull(block.getRegistryName()).getPath();
             return ConfiguredModel.builder()
                     .modelFile(models()
                             .withExistingParent(name, modLoc("block/table"))
@@ -72,10 +72,10 @@ public class ModBlockStates extends BlockStateProvider {
         });
     }
 
-    private void futureDashboard(Block block, String type) {
+    private void futureDashboard(final Block block, final String type) {
         getVariantBuilder(block).forAllStates(state -> {
-            String name = Objects.requireNonNull(block.getRegistryName()).getPath();
-            Direction direction = state.getValue(FutureDashboardBlock.FACING);
+            final String name = Objects.requireNonNull(block.getRegistryName()).getPath();
+            final Direction direction = state.getValue(FutureDashboardBlock.FACING);
             return ConfiguredModel.builder()
                     .modelFile(models()
                             .withExistingParent(name, modLoc("block/future_dashboard"))

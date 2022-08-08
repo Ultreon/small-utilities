@@ -1,8 +1,11 @@
 package com.ultreon.mods.smallutilities.client;
 
 import com.ultreon.mods.smallutilities.SmallUtilities;
-import com.ultreon.mods.smallutilities.client.overlay.ExtraHud;
+import com.ultreon.mods.smallutilities.client.gui.overlay.ExtraHud;
+import com.ultreon.mods.smallutilities.client.gui.screen.TrashCanScreen;
 import com.ultreon.mods.smallutilities.init.ModBlocks;
+import com.ultreon.mods.smallutilities.init.ModMenus;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.api.distmarker.Dist;
@@ -30,6 +33,9 @@ public class ClientModEvents {
 
         // Register overlays.
         OverlayRegistry.registerOverlayAbove(ForgeIngameGui.HOTBAR_ELEMENT, SmallUtilities.MOD_ID + ":extra_hud", new ExtraHud());
+
+        // Register block entity renderers.
+        MenuScreens.register(ModMenus.TRASH_CAN.get(), TrashCanScreen::new);
     }
 
 }

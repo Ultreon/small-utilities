@@ -1,4 +1,4 @@
-package com.ultreon.mods.smallutilities.client.overlay;
+package com.ultreon.mods.smallutilities.client.gui.overlay;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.ultreon.mods.smallutilities.SmallUtilities;
@@ -15,7 +15,7 @@ public class ExtraHud extends GuiComponent implements IIngameOverlay {
     private static final Font font = Minecraft.getInstance().font;
 
     @Override
-    public void render(ForgeIngameGui gui, PoseStack poseStack, float partialTick, int width, int height) {
+    public void render(final ForgeIngameGui gui, final PoseStack poseStack, final float partialTick, final int width, final int height) {
 //        LocalPlayer player = Minecraft.getInstance().player;
 //        if (player == null) return;
 //
@@ -26,15 +26,15 @@ public class ExtraHud extends GuiComponent implements IIngameOverlay {
 //        drawTextFrame(poseStack, "Location: " + x + ", " + y + ", " + z, 2, 2);
     }
 
-    public static void drawTextFrame(PoseStack pose, String text, int x, int y) {
+    public static void drawTextFrame(final PoseStack pose, final String text, final int x, final int y) {
 //        drawTextFrame(pose, text, x, y, 0xffffff);
     }
 
-    public static void drawTextFrame(PoseStack pose, String text, int x, int y, int color) {
+    public static void drawTextFrame(final PoseStack pose, final String text, final int x, final int y, final int color) {
 //        drawTextFrame(pose, text, x, y, color, 0);
     }
 
-    public static void drawTextFrame(PoseStack pose, String text, int x, int y, int color, int extraSpace) {
+    public static void drawTextFrame(final PoseStack pose, final String text, final int x, final int y, final int color, final int extraSpace) {
 //        RenderSystem.setShaderTexture(0, TEXT_FRAME);
 //        int width = font.width(text) + extraSpace + 2;
 //        blit(pose, x, y, 3, 15, 0, 0, 3, 15, 23, 15);

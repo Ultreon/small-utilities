@@ -15,16 +15,16 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = SmallUtilities.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class TickHooks {
-    private static int stoneCutterDamageTicker = 0;
+    private static int stoneCutterDamageTicker;
 
     @SubscribeEvent
-    public static void playerTick(TickEvent.PlayerTickEvent event) {
+    public static void playerTick(final TickEvent.PlayerTickEvent event) {
         final int stoneCutterDamageDelay = Config.STONE_CUTTER_DAMAGE_DELAY.get();
 
         final Player player = event.player;
         final Level level = player.level;
         final BlockState blockState = level.getBlockState(new BlockPos(player.getBlockX(), player.getBlockY(), player.getBlockZ()));
-        if (event.phase == TickEvent.Phase.START && event.side == LogicalSide.SERVER) {
+        if (TickEvent.Phase.START == event.phase && LogicalSide.SERVER == event.side) {
             if (blockState.getBlock() instanceof StonecutterBlock) {
                 if (++stoneCutterDamageTicker >= stoneCutterDamageDelay) {
                     stoneCutterDamageTicker = 0;

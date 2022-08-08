@@ -44,8 +44,8 @@ public final class ModBlocks {
     private static final Char2ReferenceArrayMap<RegistryObject<FutureDashboardBlock>> FUTURE_DASHBOARD_LETTERS = new Char2ReferenceArrayMap<>();
 
     static {
-        for (char c = 'a'; c <= 'z'; c++) {
-            RegistryObject<FutureDashboardBlock> blockReg = REGISTER.register("future_dashboard_%s".formatted(c), () -> new FutureDashboardBlock(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.NONE)
+        for (char c = 'a'; 'z' >= c; c++) {
+            final RegistryObject<FutureDashboardBlock> blockReg = REGISTER.register("future_dashboard_%s".formatted(c), () -> new FutureDashboardBlock(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.NONE)
                     .sound(SoundType.METAL)
                     .strength(5f, 6f)
                     .requiresCorrectToolForDrops()
@@ -74,8 +74,8 @@ public final class ModBlocks {
     public static final RegistryObject<TableBlock> ACACIA_TABLE = registerTable("acacia");
     public static final RegistryObject<TableBlock> DARK_OAK_TABLE = registerTable("dark_oak");
 
-    private static RegistryObject<CoffeeTableBlock> registerCoffeeTable(String name) {
-        RegistryObject<CoffeeTableBlock> object = REGISTER.register(name + "_coffee_table", () -> new CoffeeTableBlock(BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.WOOD)
+    private static RegistryObject<CoffeeTableBlock> registerCoffeeTable(final String name) {
+        final RegistryObject<CoffeeTableBlock> object = REGISTER.register(name + "_coffee_table", () -> new CoffeeTableBlock(BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.WOOD)
                 .strength(2f)
                 .sound(SoundType.WOOD)
                 .noOcclusion()));
@@ -85,8 +85,8 @@ public final class ModBlocks {
         return object;
     }
 
-    private static RegistryObject<TableBlock> registerTable(String name) {
-        RegistryObject<TableBlock> object = REGISTER.register(name + "_table", () -> new TableBlock(BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.WOOD)
+    private static RegistryObject<TableBlock> registerTable(final String name) {
+        final RegistryObject<TableBlock> object = REGISTER.register(name + "_table", () -> new TableBlock(BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.WOOD)
                 .strength(2f)
                 .sound(SoundType.WOOD)
                 .noOcclusion()));
@@ -96,7 +96,7 @@ public final class ModBlocks {
         return object;
     }
 
-    public static void register(IEventBus eventBus) {
+    public static void register(final IEventBus eventBus) {
         REGISTER.register(eventBus);
     }
 
@@ -116,7 +116,7 @@ public final class ModBlocks {
         return FUTURE_DASHBOARD_LETTERS.values().stream().map(RegistryObject::get);
     }
 
-    public static FutureDashboardBlock getFutureDashboard(char letter) {
+    public static FutureDashboardBlock getFutureDashboard(final char letter) {
         return FUTURE_DASHBOARD_LETTERS.get(letter).get();
     }
 }

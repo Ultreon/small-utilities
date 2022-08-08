@@ -20,9 +20,9 @@ public final class ModItems {
     public static final RegistryObject<BlockItem> FUTURE_DASHBOARD = REGISTER.register("future_dashboard", () -> new BlockItem(ModBlocks.FUTURE_DASHBOARD.get(), new Item.Properties()
             .tab(CreativeModeTab.TAB_DECORATIONS)));
     public static final RegistryObject<BlockItem> TRASH_CAN = REGISTER.register("trash_can", () -> new BlockItem(ModBlocks.TRASH_CAN.get(), new Item.Properties()
-            .tab(CreativeModeTab.TAB_DECORATIONS)));
+            .tab(CreativeModeTab.TAB_REDSTONE)));
 
-    public static void register(IEventBus eventBus) {
+    public static void register(final IEventBus eventBus) {
         REGISTER.register(eventBus);
     }
 }

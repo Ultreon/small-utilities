@@ -37,19 +37,19 @@ public class LaptopBlock extends Block {
     private static final VoxelShape SHAPE_SOUTH = Block.box(1, 0, 5, 15, 2, 15);
     private static final VoxelShape SHAPE_WEST = Block.box(1, 0, 1, 11, 2, 15);
 
-    public LaptopBlock(Properties properties) {
+    public LaptopBlock(final Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(CLOSED, true));
+        registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(CLOSED, true));
     }
 
-    public boolean canSurvive(@NotNull BlockState pState, @NotNull LevelReader pLevel, BlockPos pPos) {
-        BlockPos blockpos = pPos.below();
-        return canSupportRigidBlock(pLevel, blockpos) || canSupportCenter(pLevel, blockpos, Direction.UP);
+    public boolean canSurvive(@NotNull final BlockState pState, @NotNull final LevelReader pLevel, final BlockPos pPos) {
+        final BlockPos blockpos = pPos.below();
+        return Block.canSupportRigidBlock(pLevel, blockpos) || Block.canSupportCenter(pLevel, blockpos, Direction.UP);
     }
 
     @NotNull
     @Override
-    public VoxelShape getShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
+    public VoxelShape getShape(@NotNull final BlockState pState, @NotNull final BlockGetter pLevel, @NotNull final BlockPos pPos, @NotNull final CollisionContext pContext) {
         return switch (pState.getValue(FACING)) {
             case NORTH -> SHAPE_NORTH;
             case EAST -> SHAPE_EAST;
@@ -60,32 +60,32 @@ public class LaptopBlock extends Block {
     }
 
     @NotNull
-    public VoxelShape getOcclusionShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos) {
+    public VoxelShape getOcclusionShape(@NotNull final BlockState pState, @NotNull final BlockGetter pLevel, @NotNull final BlockPos pPos) {
         return Shapes.empty();
     }
 
-    public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
+    public BlockState getStateForPlacement(final BlockPlaceContext pContext) {
+        return defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
     }
 
     @NotNull
     @Override
-    public InteractionResult use(BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull Player pPlayer, @NotNull InteractionHand pHand, @NotNull BlockHitResult pHit) {
+    public InteractionResult use(final BlockState pState, @NotNull final Level pLevel, @NotNull final BlockPos pPos, @NotNull final Player pPlayer, @NotNull final InteractionHand pHand, @NotNull final BlockHitResult pHit) {
         if (pState.getValue(CLOSED)) {
             pLevel.setBlock(pPos, pState.setValue(CLOSED, false), Block.UPDATE_NEIGHBORS | Block.UPDATE_CLIENTS);
         } else {
             pLevel.setBlock(pPos, pState.setValue(CLOSED, true), Block.UPDATE_NEIGHBORS | Block.UPDATE_CLIENTS);
         }
-        this.playSound(pPlayer, pLevel, pPos, !pState.getValue(CLOSED));
+        playSound(pPlayer, pLevel, pPos, !pState.getValue(CLOSED));
         return InteractionResult.SUCCESS;
     }
 
-    protected void playSound(@Nullable Player pPlayer, Level pLevel, BlockPos pPos, boolean pIsOpened) {
+    protected void playSound(@Nullable final Player pPlayer, final Level pLevel, final BlockPos pPos, final boolean pIsOpened) {
         if (pIsOpened) {
-            int i = this.material == Material.METAL ? 1037 : 1007;
+            final int i = material == Material.METAL ? 1037 : 1007;
             pLevel.levelEvent(pPlayer, i, pPos, 0);
         } else {
-            int j = this.material == Material.METAL ? 1036 : 1013;
+            final int j = material == Material.METAL ? 1036 : 1013;
             pLevel.levelEvent(pPlayer, j, pPos, 0);
         }
 
@@ -98,7 +98,7 @@ public class LaptopBlock extends Block {
      * possible. Implementing/overriding is fine.
      */
     @NotNull
-    public BlockState rotate(BlockState pState, Rotation pRotation) {
+    public BlockState rotate(final BlockState pState, final Rotation pRotation) {
         return pState.setValue(FACING, pRotation.rotate(pState.getValue(FACING)));
     }
 
@@ -108,11 +108,11 @@ public class LaptopBlock extends Block {
      * possible. Implementing/overriding is fine.
      */
     @NotNull
-    public BlockState mirror(BlockState pState, Mirror pMirror) {
+    public BlockState mirror(final BlockState pState, final Mirror pMirror) {
         return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
     }
 
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+    protected void createBlockStateDefinition(final StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(FACING, CLOSED);
     }
 }

@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class ModBlockTags extends BlockTagsProvider {
-    public ModBlockTags(DataGenerator pGenerator, @Nullable ExistingFileHelper existingFileHelper) {
+    public ModBlockTags(final DataGenerator pGenerator, @Nullable final ExistingFileHelper existingFileHelper) {
         super(pGenerator, SmallUtilities.MOD_ID, existingFileHelper);
     }
 
@@ -26,27 +26,27 @@ public class ModBlockTags extends BlockTagsProvider {
 
     @Override
     protected void addTags() {
-        TagAppender<Block> mineableWithPickaxe = tag(BlockTags.MINEABLE_WITH_PICKAXE)
+        final TagAppender<Block> mineableWithPickaxe = tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(ModBlocks.FUTURE_DASHBOARD.get())
                 .add(ModBlocks.LAPTOP.get())
                 .add(ModBlocks.IRON_GRID_PLATE.get())
                 .add(ModBlocks.TRASH_CAN.get());
-        TagAppender<Block> needsStoneTool = tag(BlockTags.NEEDS_STONE_TOOL)
+        final TagAppender<Block> needsStoneTool = tag(BlockTags.NEEDS_STONE_TOOL)
                 .add(ModBlocks.FUTURE_DASHBOARD.get())
                 .add(ModBlocks.LAPTOP.get())
                 .add(ModBlocks.IRON_GRID_PLATE.get())
                 .add(ModBlocks.TRASH_CAN.get());
 
-        for (FutureDashboardBlock block : ModBlocks.getAllFutureDashboards().toList()) {
+        for (final FutureDashboardBlock block : ModBlocks.getAllFutureDashboards().toList()) {
             mineableWithPickaxe.add(block);
             needsStoneTool.add(block);
         }
 
-        for (CoffeeTableBlock block : ModBlocks.getAllCoffeeTables().toList()) {
+        for (final CoffeeTableBlock block : ModBlocks.getAllCoffeeTables().toList()) {
             tag(BlockTags.MINEABLE_WITH_AXE)
                     .add(block);
         }
-        for (TableBlock block : ModBlocks.getAllTables().toList()) {
+        for (final TableBlock block : ModBlocks.getAllTables().toList()) {
             tag(BlockTags.MINEABLE_WITH_AXE)
                     .add(block);
         }

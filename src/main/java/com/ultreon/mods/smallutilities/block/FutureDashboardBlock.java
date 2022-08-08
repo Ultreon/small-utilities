@@ -35,34 +35,35 @@ public class FutureDashboardBlock extends HorizontalDirectionalBlock {
             Block.box(0, 0, 0, 5, 16, 16)
     );
 
-    public FutureDashboardBlock(Properties properties) {
+    public FutureDashboardBlock(final Properties properties) {
         super(properties);
 
-        registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH));
+        registerDefaultState(getStateDefinition().any().setValue(HorizontalDirectionalBlock.FACING, Direction.NORTH));
     }
 
     @NotNull
     @Override
-    public VoxelShape getShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
-        return switch (pState.getValue(FACING)) {
+    public VoxelShape getShape(@NotNull final BlockState pState, @NotNull final BlockGetter pLevel, @NotNull final BlockPos pPos, @NotNull final CollisionContext pContext) {
+        return switch (pState.getValue(HorizontalDirectionalBlock.FACING)) {
             case NORTH -> SHAPE_NORTH;
             case EAST -> SHAPE_EAST;
             case SOUTH -> SHAPE_SOUTH;
             case WEST -> SHAPE_WEST;
-            default -> throw new IllegalStateException("Unexpected value: " + pState.getValue(FACING));
+            default ->
+                    throw new IllegalStateException("Unexpected value: " + pState.getValue(HorizontalDirectionalBlock.FACING));
         };
     }
 
     @NotNull
-    public VoxelShape getOcclusionShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos) {
+    public VoxelShape getOcclusionShape(@NotNull final BlockState pState, @NotNull final BlockGetter pLevel, @NotNull final BlockPos pPos) {
         return Shapes.empty();
     }
 
-    public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection());
+    public BlockState getStateForPlacement(final BlockPlaceContext pContext) {
+        return defaultBlockState().setValue(HorizontalDirectionalBlock.FACING, pContext.getHorizontalDirection());
     }
 
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(FACING);
+    protected void createBlockStateDefinition(final StateDefinition.Builder<Block, BlockState> pBuilder) {
+        pBuilder.add(HorizontalDirectionalBlock.FACING);
     }
 }

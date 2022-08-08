@@ -12,7 +12,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import java.util.Objects;
 
 public class ModItemModels extends ItemModelProvider {
-    public ModItemModels(DataGenerator generator, ExistingFileHelper exFileHelper) {
+    public ModItemModels(final DataGenerator generator, final ExistingFileHelper exFileHelper) {
         super(generator, SmallUtilities.MOD_ID, exFileHelper);
     }
 
@@ -29,7 +29,7 @@ public class ModItemModels extends ItemModelProvider {
         });
     }
 
-    private void blockItem(Block block) {
+    private void blockItem(final Block block) {
         withExistingParent(Objects.requireNonNull(block.asItem().getRegistryName()).getPath(), modLoc("block/" + Objects.requireNonNull(block.getRegistryName()).getPath()));
     }
 }

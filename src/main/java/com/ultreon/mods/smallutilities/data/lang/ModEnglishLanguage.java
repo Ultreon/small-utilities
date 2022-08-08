@@ -10,11 +10,11 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.LanguageProvider;
 
 public class ModEnglishLanguage extends LanguageProvider {
-    public ModEnglishLanguage(DataGenerator generator, ExistingFileHelper exFileHelper, String country) {
+    public ModEnglishLanguage(final DataGenerator generator, final ExistingFileHelper exFileHelper, final String country) {
         super(generator, SmallUtilities.MOD_ID, "en_" + country);
     }
 
-    public static ModEnglishLanguage ofCountry(DataGenerator generator, ExistingFileHelper exFileHelper, String country) {
+    public static ModEnglishLanguage ofCountry(final DataGenerator generator, final ExistingFileHelper exFileHelper, final String country) {
         return new ModEnglishLanguage(generator, exFileHelper, country);
     }
 
@@ -48,14 +48,20 @@ public class ModEnglishLanguage extends LanguageProvider {
         addBlock(ModBlocks.ACACIA_TABLE, "Acacia Table");
         addBlock(ModBlocks.DARK_OAK_TABLE, "Dark Oak Table");
 
-        for (FutureDashboardBlock block : ModBlocks.getAllFutureDashboards().toList()) {
+        for (final FutureDashboardBlock block : ModBlocks.getAllFutureDashboards().toList()) {
             addBlock(() -> block, "Future Dashboard");
         }
 
         addBlock(ModBlocks.FUTURE_DASHBOARD, "Future Dashboard");
+
+        add("container.smallutils.trash_can", "Trash Can");
+        add("container.smallutils.trash_can.trash", "Trash");
+        add("container.smallutils.trash_can.delete_confirmation.title", "Delete Confirmation");
+        add("container.smallutils.trash_can.delete_confirmation.description", "You're deleting %d items, are you sure you want to delete them?");
+        add("container.smallutils.trash_can.delete_confirmation.description1", "This will grant you between %d and %d XP.");
     }
 
-    private void addDamageSource(DamageSource key, String name) {
+    private void addDamageSource(final DamageSource key, final String name) {
         add("death.attack." + key.msgId, name);
         add("death.attack." + key.msgId + ".player", name + " whilst fighting %2$s");
     }
