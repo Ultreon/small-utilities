@@ -1,0 +1,19 @@
+{
+    "variants": {
+        "facing=north": {
+            "model": "smallutils:block/future_dashboard_m",
+            "y": 180
+        },
+        "facing=south": {
+            "model": "smallutils:block/future_dashboard_m"
+        },
+        "facing=west": {
+            "model": "smallutils:block/future_dashboard_m",
+            "y": 90
+        },
+        "facing=east": {
+            "model": "smallutils:block/future_dashboard_m",
+            "y": 270
+        }
+    }
+}

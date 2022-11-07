@@ -1,0 +1,42 @@
+modLoader = "javafml" #mandatory
+loaderVersion = "[40,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+license = "All Rights Reserved"
+#issueTrackerURL="http://my.issue.tracker/" #optional
+
+[[mods]] #mandatory
+modId = "smallutils" #mandatory
+version = "${version}" #mandatory
+displayName = "Small Utilities" #mandatory
+#updateJSONURL="http://myurl.me/" #optional
+#displayURL="http://example.com/" #optional
+#logoFile="smallutils.png" #optional
+#credits="Thanks for this example mod goes to Java" #optional
+authors = "Qboi" #optional
+description = '''
+Small utilities to make minecraft a little bit more realistic
+
+§6Credits:
+    §e***§7 Laptop V2 by FishyBusiness is licensed under Creative Commons Attribution§e ***
+    §8License:§7 http://creativecommons.org/licenses/by/4.0/
+    §8Download:§7 https://sketchfab.com/3d-models/laptop-v2-10b153c036d54f6ea03e08e6f81e33f6
+    §8User:§7 https://sketchfab.com/FishyBusiness
+
+    §e***§7 Trash Can [Minecraft] by sedona1029 is licensed under Creative Commons Attribution§e ***
+    §8License:§7 http://creativecommons.org/licenses/by/4.0/
+    §8Download:§7 https://sketchfab.com/3d-models/trash-can-minecraft-831dd489b8044ba8bb77f0ca253dcfde
+    §8User:§7 https://sketchfab.com/sedona1029
+'''
+
+[[dependencies.smallutils]] #optional
+modId = "forge" #mandatory
+mandatory = true #mandatory
+versionRange = "[40,)" #mandatory
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.smallutils]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.18.2,1.19)"
+ordering = "NONE"
+side = "BOTH"

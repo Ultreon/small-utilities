@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "smallutils:laptop",
+    "smallutils:trash_can",
+    "minecraft:bedrock",
+    "minecraft:command_block",
+    "minecraft:chain_command_block",
+    "minecraft:repeating_command_block",
+    "minecraft:barrier",
+    "minecraft:structure_block",
+    "minecraft:structure_void",
+    "minecraft:jigsaw",
+    "minecraft:debug_stick"
+  ]
+}

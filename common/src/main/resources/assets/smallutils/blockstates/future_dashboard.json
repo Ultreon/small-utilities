@@ -1,0 +1,202 @@
+{
+    "variants": {
+        "facing=east": [
+            {
+                "model": "smallutils:block/future_dashboard0",
+                "weight": 16,
+                "y": 270
+            },
+            {
+                "model": "smallutils:block/future_dashboard1",
+                "weight": 16,
+                "y": 270
+            },
+            {
+                "model": "smallutils:block/future_dashboard2",
+                "weight": 16,
+                "y": 270
+            },
+            {
+                "model": "smallutils:block/future_dashboard3",
+                "weight": 16,
+                "y": 270
+            },
+            {
+                "model": "smallutils:block/future_dashboard4",
+                "weight": 16,
+                "y": 270
+            },
+            {
+                "model": "smallutils:block/future_dashboard5",
+                "weight": 16,
+                "y": 270
+            },
+            {
+                "model": "smallutils:block/future_dashboard6",
+                "weight": 16,
+                "y": 270
+            },
+            {
+                "model": "smallutils:block/future_dashboard7",
+                "weight": 16,
+                "y": 270
+            },
+            {
+                "model": "smallutils:block/future_dashboard8",
+                "weight": 16,
+                "y": 270
+            },
+            {
+                "model": "smallutils:block/future_dashboard9",
+                "weight": 1,
+                "y": 270
+            }
+        ],
+        "facing=north": [
+            {
+                "model": "smallutils:block/future_dashboard0",
+                "weight": 16,
+                "y": 180
+            },
+            {
+                "model": "smallutils:block/future_dashboard1",
+                "weight": 16,
+                "y": 180
+            },
+            {
+                "model": "smallutils:block/future_dashboard2",
+                "weight": 16,
+                "y": 180
+            },
+            {
+                "model": "smallutils:block/future_dashboard3",
+                "weight": 16,
+                "y": 180
+            },
+            {
+                "model": "smallutils:block/future_dashboard4",
+                "weight": 16,
+                "y": 180
+            },
+            {
+                "model": "smallutils:block/future_dashboard5",
+                "weight": 16,
+                "y": 180
+            },
+            {
+                "model": "smallutils:block/future_dashboard6",
+                "weight": 16,
+                "y": 180
+            },
+            {
+                "model": "smallutils:block/future_dashboard7",
+                "weight": 16,
+                "y": 180
+            },
+            {
+                "model": "smallutils:block/future_dashboard8",
+                "weight": 16,
+                "y": 180
+            },
+            {
+                "model": "smallutils:block/future_dashboard9",
+                "weight": 1,
+                "y": 180
+            }
+        ],
+        "facing=south": [
+            {
+                "model": "smallutils:block/future_dashboard0",
+                "weight": 16
+            },
+            {
+                "model": "smallutils:block/future_dashboard1",
+                "weight": 16
+            },
+            {
+                "model": "smallutils:block/future_dashboard2",
+                "weight": 16
+            },
+            {
+                "model": "smallutils:block/future_dashboard3",
+                "weight": 16
+            },
+            {
+                "model": "smallutils:block/future_dashboard4",
+                "weight": 16
+            },
+            {
+                "model": "smallutils:block/future_dashboard5",
+                "weight": 16
+            },
+            {
+                "model": "smallutils:block/future_dashboard6",
+                "weight": 16
+            },
+            {
+                "model": "smallutils:block/future_dashboard7",
+                "weight": 16
+            },
+            {
+                "model": "smallutils:block/future_dashboard8",
+                "weight": 16
+            },
+            {
+                "model": "smallutils:block/future_dashboard9",
+                "weight": 1
+            }
+        ],
+        "facing=west": [
+            {
+                "model": "smallutils:block/future_dashboard0",
+                "weight": 16,
+                "y": 90
+            },
+            {
+                "model": "smallutils:block/future_dashboard1",
+                "weight": 16,
+                "y": 90
+            },
+            {
+                "model": "smallutils:block/future_dashboard2",
+                "weight": 16,
+                "y": 90
+            },
+            {
+                "model": "smallutils:block/future_dashboard3",
+                "weight": 16,
+                "y": 90
+            },
+            {
+                "model": "smallutils:block/future_dashboard4",
+                "weight": 16,
+                "y": 90
+            },
+            {
+                "model": "smallutils:block/future_dashboard5",
+                "weight": 16,
+                "y": 90
+            },
+            {
+                "model": "smallutils:block/future_dashboard6",
+                "weight": 16,
+                "y": 90
+            },
+            {
+                "model": "smallutils:block/future_dashboard7",
+                "weight": 16,
+                "y": 90
+            },
+            {
+                "model": "smallutils:block/future_dashboard8",
+                "weight": 16,
+                "y": 90
+            },
+            {
+                "model": "smallutils:block/future_dashboard9",
+                "weight": 1,
+                "y": 90
+            }
+        ]
+    }
+}

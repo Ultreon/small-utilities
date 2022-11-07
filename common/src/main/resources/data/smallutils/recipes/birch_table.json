@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "# #",
+    "# #"
+  ],
+  "key": {
+    "#": [
+      {
+        "item": "minecraft:stripped_birch_log"
+      },
+      {
+        "item": "minecraft:stripped_birch_wood"
+      }
+    ]
+  },
+  "result": {
+    "item": "smallutils:birch_table",
+    "count": 4
+  }
+}

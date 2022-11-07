@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=top": {
+      "model": "smallutils:block/iron_grid_plate_top"
+    },
+    "half=bottom": {
+      "model": "smallutils:block/iron_grid_plate_bottom"
+    }
+  }
+}
