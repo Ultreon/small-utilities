@@ -5,14 +5,24 @@
   "name": "Small Utilities",
   "description": "\nSmall utilities to make minecraft a little bit more realistic\n\n§6Credits:\n    §e***§7 Laptop V2 by FishyBusiness is licensed under Creative Commons Attribution§e ***\n    §8License:§7 http://creativecommons.org/licenses/by/4.0/\n    §8Download:§7 https://sketchfab.com/3d-models/laptop-v2-10b153c036d54f6ea03e08e6f81e33f6\n    §8User:§7 https://sketchfab.com/FishyBusiness\n\n    §e***§7 Trash Can [Minecraft] by sedona1029 is licensed under Creative Commons Attribution§e ***\n    §8License:§7 http://creativecommons.org/licenses/by/4.0/\n    §8Download:§7 https://sketchfab.com/3d-models/trash-can-minecraft-831dd489b8044ba8bb77f0ca253dcfde\n    §8User:§7 https://sketchfab.com/sedona1029",
   "authors": [
-    "Qboi"
+    "Ultreon Team"
+  ],
+  "contributors": [
+    {
+      "name": "Qboi",
+      "contact": {
+        "homepage": "https://qboi.tk",
+        "sources": "https://github.com/Qboi123"
+      }
+    }
   ],
   "contact": {
-    "homepage": "https://ultreon.github.io/web/",
-    "sources": "https://github.com/Ultreon/small-utilities"
+    "homepage": "https://github.com/Ultreon/small-utilities",
+    "sources": "https://github.com/Ultreon/small-utilities",
+    "issues": "https://github.com/Ultreon/small-utilities/issues"
   },
   "license": "All rights reserved",
-  "icon": "assets/examplemod/icon.png",
+  "icon": "assets/smallutils/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [

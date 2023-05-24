@@ -1,17 +1,17 @@
-modLoader = "javafml" #mandatory
-loaderVersion = "[40,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+modLoader = "javafml"
+loaderVersion = "[40,)" # This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
 license = "All Rights Reserved"
-#issueTrackerURL="http://my.issue.tracker/" #optional
+issueTrackerURL="https://github.com/Ultreon/small-utilities/issues"
 
-[[mods]] #mandatory
-modId = "smallutils" #mandatory
-version = "${version}" #mandatory
-displayName = "Small Utilities" #mandatory
-#updateJSONURL="http://myurl.me/" #optional
-#displayURL="http://example.com/" #optional
-#logoFile="smallutils.png" #optional
-#credits="Thanks for this example mod goes to Java" #optional
-authors = "Qboi" #optional
+[[mods]]
+modId = "smallutils"
+version = "${version}"
+displayName = "Small Utilities"
+#updateJSONURL="http://myurl.me/"
+displayURL="https://github.com/Ultreon/small-utilities"
+logoFile="small-utilities.png"
+credits="Qboi"
+authors = "Ultreon Team"
 description = '''
 Small utilities to make minecraft a little bit more realistic
 
@@ -27,10 +27,10 @@ Small utilities to make minecraft a little bit more realistic
     §8User:§7 https://sketchfab.com/sedona1029
 '''
 
-[[dependencies.smallutils]] #optional
-modId = "forge" #mandatory
-mandatory = true #mandatory
-versionRange = "[40,)" #mandatory
+[[dependencies.smallutils]]
+modId = "forge"
+mandatory = true
+versionRange = "[40,)"
 ordering = "NONE"
 side = "BOTH"
 
