@@ -48,6 +48,7 @@ public class SmallUtilities {
         ModMenus.register();
         ModBlockEntities.register();
         ModStats.register();
+        ModGamerules.register();
         ModTags.init();
 
         Config.init();
@@ -55,6 +56,8 @@ public class SmallUtilities {
         EnvExecutor.runInEnv(Env.CLIENT, () -> () -> {
             ClientModEvents.initClient();
         });
+
+        registerEvents();
 
         TickHooks.init();
 
@@ -104,5 +107,9 @@ public class SmallUtilities {
 
     public List<Block> getCutterBlocks() {
         return Collections.unmodifiableList(CUTTER_BLOCKS);
+    }
+
+    private static void registerEvents() {
+        ExplosionEvent.PRE.register((level, explosion) -> !level.getGameRules().getBoolean(ModGamerules.DO_EXPLOSIONS) ? EventResult.interruptFalse() : EventResult.pass());
     }
 }
