@@ -92,7 +92,7 @@ public class DeleteConfirmationScreen extends Screen {
         {
             pose.scale(2f, 2f, 1f);
 
-            GuiComponent.drawCenteredString(pose, this.font, this.title, midX / 2, titleY, 0xFFFFFF);
+            GuiComponent.drawCenteredString(pose, this.font, this.title, midX / 2, titleY / 2, 0xFFFFFF);
         }
         pose.popPose();
 
