@@ -1,10 +1,36 @@
 plugins {
     id "architectury-plugin" version "3.4-SNAPSHOT"
-    id "dev.architectury.loom" version "0.12.0-SNAPSHOT" apply false
+    id "dev.architectury.loom" version "1.0-SNAPSHOT" apply false
 }
 
 architectury {
     minecraft = rootProject.minecraft_version
+}
+
+tasks.register('collectJars') {
+    dependsOn ":forge:build"
+    dependsOn ":fabric:build"
+    dependsOn ":common:build"
+
+    doFirst {
+        delete fileTree("$buildDir/libs/collected")
+        mkdir "$buildDir/libs/collected"
+        copy {
+            from "$projectDir/common/build/libs/$archivesBaseName-${version}.jar"
+            into "$buildDir/libs/collected"
+            rename ".*", "$archivesBaseName-common-${version}.jar"
+        }
+        copy {
+            from "$projectDir/forge/build/libs/$archivesBaseName-${version}.jar"
+            into "$buildDir/libs/collected"
+            rename ".*", "$archivesBaseName-forge-${version}.jar"
+        }
+        copy {
+            from "$projectDir/fabric/build/libs/$archivesBaseName-${version}.jar"
+            into "$buildDir/libs/collected"
+            rename ".*", "$archivesBaseName-fabric-${version}.jar"
+        }
+    }
 }
 
 subprojects {
