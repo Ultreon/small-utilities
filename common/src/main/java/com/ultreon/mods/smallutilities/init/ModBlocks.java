@@ -11,6 +11,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
@@ -34,7 +35,8 @@ public final class ModBlocks {
             .lightLevel(value -> value.getValue(LaptopBlock.CLOSED) ? 4 : 0)
             .sound(SoundType.METAL)
             .strength(5f, 6f)
-            .requiresCorrectToolForDrops()
+            .noOcclusion()));
+    public static final RegistrySupplier<PostboxBlock> POSTBOX = REGISTER.register("postbox", () -> new PostboxBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)
             .noOcclusion()));
     public static final RegistrySupplier<FutureDashboardBlock> FUTURE_DASHBOARD = REGISTER.register("future_dashboard", () -> new FutureDashboardBlock(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.NONE)
             .sound(SoundType.METAL)

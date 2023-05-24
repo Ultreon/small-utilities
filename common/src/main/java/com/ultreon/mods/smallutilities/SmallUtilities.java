@@ -3,15 +3,23 @@ package com.ultreon.mods.smallutilities;
 import com.ultreon.mods.smallutilities.client.ClientModEvents;
 import com.ultreon.mods.smallutilities.hooks.TickHooks;
 import com.ultreon.mods.smallutilities.init.*;
+import dev.architectury.event.EventResult;
+import dev.architectury.event.events.common.ExplosionEvent;
 import dev.architectury.event.events.common.LifecycleEvent;
 import dev.architectury.utils.Env;
 import dev.architectury.utils.EnvExecutor;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtIo;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.LevelResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -29,6 +37,7 @@ import java.util.List;
 public class SmallUtilities {
     public static final String MOD_ID = "smallutils";
     public static final Logger LOGGER = LoggerFactory.getLogger("SmallUtils");
+    public static final LevelResource PLAYER_LEVEL_RES = new LevelResource("data/" + MOD_ID + "/players");
 
     private static final List<Block> CUTTER_BLOCKS = new ArrayList<>();
 
@@ -100,6 +109,22 @@ public class SmallUtilities {
 
     public static void registerCutterBlock(final Block block) {
         CUTTER_BLOCKS.add(block);
+    }
+
+    public static Path resolvePlayerPath(ServerPlayer serverPlayer) {
+        return serverPlayer.getServer().getWorldPath(PLAYER_LEVEL_RES).resolve(serverPlayer.getUUID().toString());
+    }
+
+    public static Path resolvePlayerDataPath(ServerPlayer serverPlayer, String path) {
+        return resolvePlayerPath(serverPlayer).resolve(path);
+    }
+
+    public static CompoundTag readPlayerData(ServerPlayer serverPlayer, String path) throws IOException {
+        return NbtIo.readCompressed(resolvePlayerPath(serverPlayer).resolve(path).toFile());
+    }
+
+    public static void writePlayerData(ServerPlayer serverPlayer, String path, CompoundTag tag) throws IOException {
+        NbtIo.writeCompressed(tag, resolvePlayerPath(serverPlayer).resolve(path).toFile());
     }
 
     public List<Block> getCutterBlocks() {

@@ -1,6 +1,7 @@
 package com.ultreon.mods.smallutilities.init;
 
 import com.ultreon.mods.smallutilities.SmallUtilities;
+import com.ultreon.mods.smallutilities.block.entity.PostboxBlockEntity;
 import com.ultreon.mods.smallutilities.block.entity.TrashCanBlockEntity;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
@@ -12,6 +13,7 @@ public class ModBlockEntities {
     private static final DeferredRegister<BlockEntityType<?>> REGISTER = DeferredRegister.create(SmallUtilities.MOD_ID, Registry.BLOCK_ENTITY_TYPE_REGISTRY);
 
     public static final RegistrySupplier<BlockEntityType<TrashCanBlockEntity>> TRASH_CAN = REGISTER.register("trash_can", () -> BlockEntityType.Builder.of(TrashCanBlockEntity::new, ModBlocks.TRASH_CAN.get()).build(null));
+    public static final RegistrySupplier<BlockEntityType<PostboxBlockEntity>> POSTBOX = REGISTER.register("postbox", () -> BlockEntityType.Builder.of(PostboxBlockEntity::new, ModBlocks.POSTBOX.get()).build(null));
 
     public static void register() {
         REGISTER.register();

@@ -9,6 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 public class ModStats {
     private static final DeferredRegister<ResourceLocation> REGISTER = DeferredRegister.create(SmallUtilities.MOD_ID, Registry.CUSTOM_STAT_REGISTRY);
     public static final RegistrySupplier<ResourceLocation> OPEN_TRASH_CAN = REGISTER.register("open_trash_can", () -> new ResourceLocation(SmallUtilities.MOD_ID, "open_trash_can"));
+    public static final RegistrySupplier<ResourceLocation> OPEN_POSTBOX = REGISTER.register("open_postbox", () -> new ResourceLocation(SmallUtilities.MOD_ID, "open_postbox"));
 
     public static void register() {
         REGISTER.register();

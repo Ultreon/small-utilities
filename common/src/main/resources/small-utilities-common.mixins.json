@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "smallutilities.refmap.json",
   "mixins": [
+    "PlayerListMixin"
   ],
   "client": [
   ],
