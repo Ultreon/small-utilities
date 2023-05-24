@@ -26,6 +26,7 @@ public class ClientModEvents {
         // Do some client setup things
         RenderTypeRegistry.register(RenderType.cutout(), ModBlocks.IRON_GRID_PLATE.get());
         RenderTypeRegistry.register(RenderType.cutout(), ModBlocks.FUTURE_DASHBOARD.get());
+        ModBlocks.getAllFutureDashboards().forEach(block -> RenderTypeRegistry.register(RenderType.cutout(), block));
 
         // Register block entity renderers.
         MenuRegistry.registerScreenFactory(ModMenus.TRASH_CAN.get(), TrashCanScreen::new);
