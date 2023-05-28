@@ -1,6 +1,7 @@
 package com.ultreon.mods.smallutilities.init;
 
 import com.ultreon.mods.smallutilities.SmallUtilities;
+import com.ultreon.mods.smallutilities.inventory.PlayerPostboxContainer;
 import com.ultreon.mods.smallutilities.inventory.menu.TrashCanMenu;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;

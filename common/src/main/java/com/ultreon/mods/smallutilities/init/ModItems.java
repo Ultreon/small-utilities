@@ -1,6 +1,7 @@
 package com.ultreon.mods.smallutilities.init;
 
 import com.ultreon.mods.smallutilities.SmallUtilities;
+import com.ultreon.mods.smallutilities.item.PackageItem;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.Registry;
@@ -16,10 +17,18 @@ public final class ModItems {
     public static final RegistrySupplier<BlockItem> LAPTOP = REGISTER.register("laptop", () -> new BlockItem(ModBlocks.LAPTOP.get(), new Item.Properties()
             .tab(CreativeModeTab.TAB_DECORATIONS)
             .stacksTo(8)));
+    public static final RegistrySupplier<BlockItem> POSTBOX = REGISTER.register("postbox", () -> new BlockItem(ModBlocks.POSTBOX.get(), new Item.Properties()
+            .tab(CreativeModeTab.TAB_DECORATIONS)));
     public static final RegistrySupplier<BlockItem> FUTURE_DASHBOARD = REGISTER.register("future_dashboard", () -> new BlockItem(ModBlocks.FUTURE_DASHBOARD.get(), new Item.Properties()
             .tab(CreativeModeTab.TAB_DECORATIONS)));
     public static final RegistrySupplier<BlockItem> TRASH_CAN = REGISTER.register("trash_can", () -> new BlockItem(ModBlocks.TRASH_CAN.get(), new Item.Properties()
             .tab(CreativeModeTab.TAB_REDSTONE)));
+
+    //**************************//
+    //     Standalone Items     //
+    //**************************//
+    public static final RegistrySupplier<PackageItem> PACKAGE = REGISTER.register("package", () -> new PackageItem(new Item.Properties()
+            .tab(CreativeModeTab.TAB_MISC)));
 
     public static void register() {
         REGISTER.register();

@@ -41,6 +41,7 @@
   "block.smallutils.spruce_coffee_table": "Spruce Coffee Table",
   "block.smallutils.spruce_table": "Spruce Table",
   "block.smallutils.trash_can": "Trash Can",
+  "container.smallutils.postbox": "Postbox",
   "container.smallutils.trash_can": "Trash Can",
   "container.smallutils.trash_can.delete_confirmation.description": "You're deleting %d items, are you sure you want to delete them?",
   "container.smallutils.trash_can.delete_confirmation.description1": "This will grant you between %d and %d XP.",
