@@ -69,6 +69,11 @@ allprojects {
             name "Fuzs Mod Resources"
             url "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/"
         }
+        maven {
+            // Location of the maven that hosts Mine and Team Resourceful's files.
+            name "Resourceful Bees Maven"
+            url "https://nexus.resourcefulbees.com/repository/maven-public/"
+        }
     }
 
 

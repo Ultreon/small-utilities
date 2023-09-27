@@ -3,14 +3,16 @@ package com.ultreon.mods.smallutilities.block.entity;
 import com.ultreon.mods.smallutilities.SmallUtilities;
 import com.ultreon.mods.smallutilities.init.ModBlockEntities;
 import com.ultreon.mods.smallutilities.inventory.menu.TrashCanMenu;
+import com.ultreon.mods.smallutilities.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.WorldlyContainer;
@@ -24,7 +26,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ChestBlock;
@@ -41,7 +42,6 @@ import org.slf4j.MarkerFactory;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -125,7 +125,7 @@ public class TrashCanBlockEntity extends BaseContainerBlockEntity implements Tic
     @NotNull
     @Override
     protected Component getDefaultName() {
-        return new TranslatableComponent("container.smallutils.trash_can");
+        return Component.translatable("container.smallutils.trash_can");
     }
 
     protected NonNullList<ItemStack> getItems() {
@@ -313,7 +313,7 @@ public class TrashCanBlockEntity extends BaseContainerBlockEntity implements Tic
 //        }
 //        return super.getCapability(cap, side);
 //    }
-//
+
 //    @NotNull
 //    private IItemHandlerModifiable createHandler() {
 //        final BlockState state = this.getBlockState();
@@ -366,7 +366,7 @@ public class TrashCanBlockEntity extends BaseContainerBlockEntity implements Tic
         this.level.addFreshEntity(new ExperienceOrb(this.level, this.worldPosition.getX() + 0.5, this.worldPosition.getY() + 1.5, this.worldPosition.getZ() + 0.5, xp));
     }
 
-    public final int calculateXp(final Random random) {
+    public final int calculateXp(final RandomSource random) {
         final int min = this.calculateMaxXp() / this.getXpReduction();
         final int max = this.calculateMaxXp();
         return random.nextInt(min, max);
@@ -381,14 +381,7 @@ public class TrashCanBlockEntity extends BaseContainerBlockEntity implements Tic
     }
 
     public int calculateMaxXp() {
-        int xp = 0;
-        for (int i = 0; TrashCanMenu.SLOTS > i; ++i) {
-            final ItemStack itemStack = this.items.get(i);
-            if (!itemStack.isEmpty()) {
-                xp += itemStack.getCount() * (1 + EnchantmentHelper.getEnchantments(itemStack).keySet().stream().filter(enchantment -> !enchantment.isCurse()).count() * 2);
-            }
-        }
-        return xp;
+        return Mth.floor(Utils.calcMaxXp(this.items.subList(0, getContainerSize())));
     }
 
     @Override

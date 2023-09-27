@@ -18,18 +18,18 @@ public class DeleteConfirmationScreen extends Screen {
     private Button noButton;
 
     public DeleteConfirmationScreen(final TrashCanScreen parent) {
-        this(parent, new TranslatableComponent("container.smallutils.trash_can.delete_confirmation.description", parent.getMenu().getTrashItemCount()), parent.getMenu().calculateMaxXp() / parent.getMenu().getXpReduction(), parent.getMenu().calculateMaxXp());
+        this(parent, Component.translatable("container.smallutils.trash_can.delete_confirmation.description", parent.getMenu().getTrashItemCount()), parent.getMenu().calculateMaxXp() / parent.getMenu().getXpReduction(), parent.getMenu().calculateMaxXp());
     }
 
     public DeleteConfirmationScreen(final TrashCanScreen parent, final Component line1, final Component line2) {
-        super(new TranslatableComponent("container.smallutils.trash_can.delete_confirmation.title"));
+        super(Component.translatable("container.smallutils.trash_can.delete_confirmation.title"));
         this.parent = parent;
         this.line1 = line1;
         this.line2 = line2;
     }
 
-    public DeleteConfirmationScreen(final TrashCanScreen parent, final TranslatableComponent description, final int minXp, final int maxXp) {
-        this(parent, description, new TranslatableComponent("container.smallutils.trash_can.delete_confirmation.description1", minXp, maxXp));
+    public DeleteConfirmationScreen(final TrashCanScreen parent, final Component description, final int minXp, final int maxXp) {
+        this(parent, description, Component.translatable("container.smallutils.trash_can.delete_confirmation.description1", minXp, maxXp));
     }
 
     @Override
@@ -107,11 +107,11 @@ public class DeleteConfirmationScreen extends Screen {
                 continue;
             }
 
-            final TextComponent textComponent = new TextComponent(item.getCount() + "x ");
-            final MutableComponent name = (new TextComponent(""))
+            final MutableComponent textComponent = Component.literal(item.getCount() + "x ");
+            final MutableComponent name = (Component.literal(""))
                     .append(item.getHoverName())
                     .withStyle(style -> style.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_ITEM, new HoverEvent.ItemStackInfo(item))));
-            textComponent.append(new TextComponent("").append(name));
+            textComponent.append(Component.literal("").append(name));
 
             GuiComponent.drawCenteredString(pose, this.font, textComponent, midX, y, 0xFFFFFF);
 

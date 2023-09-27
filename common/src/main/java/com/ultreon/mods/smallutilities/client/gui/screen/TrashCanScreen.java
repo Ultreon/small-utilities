@@ -7,7 +7,6 @@ import com.ultreon.mods.smallutilities.inventory.menu.TrashCanMenu;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import org.jetbrains.annotations.NotNull;
@@ -16,7 +15,7 @@ import java.util.Objects;
 
 public class TrashCanScreen extends AbstractContainerScreen<TrashCanMenu> {
     private static final ResourceLocation TEXTURE = SmallUtilities.res("textures/gui/container/trash_can.png");
-    private static final Component TRASH_TEXT = new TranslatableComponent("container.smallutils.trash_can.trash");
+    private static final Component TRASH_TEXT = Component.translatable("container.smallutils.trash_can.trash");
 
     public TrashCanScreen(final TrashCanMenu menu, final Inventory inventory, final Component title) {
         super(menu, inventory, title);

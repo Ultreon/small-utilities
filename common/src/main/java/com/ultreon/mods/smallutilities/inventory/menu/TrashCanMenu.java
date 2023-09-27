@@ -1,8 +1,11 @@
 package com.ultreon.mods.smallutilities.inventory.menu;
 
+import com.ultreon.mods.smallutilities.block.entity.TrashCanBlockEntity;
 import com.ultreon.mods.smallutilities.init.ModBlockEntities;
 import com.ultreon.mods.smallutilities.init.ModMenus;
 import com.ultreon.mods.smallutilities.init.ModTags;
+import com.ultreon.mods.smallutilities.util.Utils;
+import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -11,7 +14,6 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
@@ -115,17 +117,8 @@ public class TrashCanMenu extends AbstractContainerMenu {
 
 
     public void trash() {
-        this.access.execute((level, blockPos) -> {
-            level.getBlockEntity(blockPos, ModBlockEntities.TRASH_CAN.get()).ifPresent(trashCan -> {
-                trashCan.trash();
-//                for (int i = 0; i < SLOTS; i++) {
-//                    ItemStack stack = this.container.getSlot(i).getItem();
-//                    if (!stack.isEmpty()) {
-//                        this.slots.get(i).set(ItemStack.EMPTY);
-//                    }
-//                }
-            });
-        });
+        this.access.execute((level, blockPos) ->
+                level.getBlockEntity(blockPos, ModBlockEntities.TRASH_CAN.get()).ifPresent(TrashCanBlockEntity::trash));
     }
 
     public final int calculateXp(final Random random) {
@@ -143,14 +136,7 @@ public class TrashCanMenu extends AbstractContainerMenu {
     }
 
     public int calculateMaxXp() {
-        int xp = 0;
-        for (int i = 0; SLOTS > i; ++i) {
-            final ItemStack itemStack = this.slots.get(i).getItem();
-            if (!itemStack.isEmpty()) {
-                xp += itemStack.getCount() * (1 + EnchantmentHelper.getEnchantments(itemStack).keySet().stream().filter(enchantment -> !enchantment.isCurse()).count() * 2);
-            }
-        }
-        return xp;
+        return Mth.floor(Utils.calcMaxXp(this.slots.stream().map(Slot::getItem).toList().subList(0, SLOTS)));
     }
 
     public int getTrashItemCount() {
